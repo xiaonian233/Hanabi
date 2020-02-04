@@ -2,9 +2,9 @@ package cn.Hanabi.injection.interfaces;
 
 public interface IS12PacketEntityVelocity
 {
-    void setX(final int p0);
+    void setX$13462e();
     
-    void setY(final int p0);
+    void setY$13462e();
     
-    void setZ(final int p0);
+    void setZ$13462e();
 }

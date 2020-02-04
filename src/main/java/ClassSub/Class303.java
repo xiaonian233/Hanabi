@@ -1,232 +1,91 @@
 package ClassSub;
 
-public class Class303 extends Class186
+import java.util.*;
+import javax.vecmath.*;
+import java.lang.invoke.*;
+
+public final class Class303
 {
-    private Class224 start;
-    private Class224 end;
-    private Class224 vec;
-    private float lenSquared;
-    private Class224 loc;
-    private Class224 v;
-    private Class224 v2;
-    private Class224 proj;
-    private Class224 closest;
-    private Class224 other;
-    private boolean outerEdge;
-    private boolean innerEdge;
-    public static final boolean Cracked_By_Somebody_Dumped_BY_Ganga_SupportedbySucen;
+    private boolean aac;
+    private float smooth;
+    private Random random;
+    private static final long a;
     
-    public Class303(final float n, final float n2, final boolean b, final boolean b2) {
-        this(0.0f, 0.0f, n, n2);
+    public Class303(final boolean aac, final float smooth) {
+        super();
+        this.aac = aac;
+        this.smooth = smooth;
+        this.random = new Random();
     }
     
-    public Class303(final float n, final float n2) {
-        this(n, n2, true, true);
-    }
-    
-    public Class303(final float n, final float n2, final float n3, final float n4) {
-        this(new Class224(n, n2), new Class224(n3, n4));
-    }
-    
-    public Class303(final float n, final float n2, final float n3, final float n4, final boolean b) {
-        this(new Class224(n, n2), new Class224(n + n3, n2 + n4));
-    }
-    
-    public Class303(final float[] array, final float[] array2) {
-        this.loc = new Class224(0.0f, 0.0f);
-        this.v = new Class224(0.0f, 0.0f);
-        this.v2 = new Class224(0.0f, 0.0f);
-        this.proj = new Class224(0.0f, 0.0f);
-        this.closest = new Class224(0.0f, 0.0f);
-        this.other = new Class224(0.0f, 0.0f);
-        this.outerEdge = true;
-        this.innerEdge = true;
-        this.set(array, array2);
-    }
-    
-    public Class303(final Class224 class224, final Class224 class225) {
-        this.loc = new Class224(0.0f, 0.0f);
-        this.v = new Class224(0.0f, 0.0f);
-        this.v2 = new Class224(0.0f, 0.0f);
-        this.proj = new Class224(0.0f, 0.0f);
-        this.closest = new Class224(0.0f, 0.0f);
-        this.other = new Class224(0.0f, 0.0f);
-        this.outerEdge = true;
-        this.innerEdge = true;
-        this.set(class224, class225);
-    }
-    
-    public void set(final float[] array, final float[] array2) {
-        this.set(array[0], array[1], array2[0], array2[1]);
-    }
-    
-    public Class224 getStart() {
-        return this.start;
-    }
-    
-    public Class224 getEnd() {
-        return this.end;
-    }
-    
-    public float length() {
-        return this.vec.length();
-    }
-    
-    public float lengthSquared() {
-        return this.vec.lengthSquared();
-    }
-    
-    public void set(final Class224 class224, final Class224 class225) {
-        super.pointsDirty = true;
-        if (this.start == null) {
-            this.start = new Class224();
+    public final Class97 calculateAngle(final Vector3d vector3d, final Vector3d vector3d2) {
+        final int[] b = Class139.b();
+        final Class97 class97 = new Class97();
+        final int[] array = b;
+        final double x = vector3d.x;
+        Class303 class98 = this;
+        float randomFloat = 0.0f;
+        Label_0041: {
+            if (array == null) {
+                if (!this.aac) {
+                    randomFloat = 0.0f;
+                    break Label_0041;
+                }
+                class98 = this;
+            }
+            randomFloat = class98.randomFloat(-0.75f, 0.75f);
         }
-        this.start.set(class224);
-        if (this.end == null) {
-            this.end = new Class224();
+        vector3d.x = x + (randomFloat - vector3d2.x);
+        final double y = vector3d.y;
+        Class303 class99 = this;
+        float randomFloat2 = 0.0f;
+        Label_0079: {
+            if (array == null) {
+                if (!this.aac) {
+                    randomFloat2 = 0.0f;
+                    break Label_0079;
+                }
+                class99 = this;
+            }
+            randomFloat2 = class99.randomFloat(-0.25f, 0.5f);
         }
-        this.end.set(class225);
-        (this.vec = new Class224(class225)).sub(class224);
-        this.lenSquared = this.vec.lengthSquared();
-    }
-    
-    public void set(final float n, final float n2, final float n3, final float n4) {
-        super.pointsDirty = true;
-        this.start.set(n, n2);
-        this.end.set(n3, n4);
-        final float n5 = n3 - n;
-        final float n6 = n4 - n2;
-        this.vec.set(n5, n6);
-        this.lenSquared = n5 * n5 + n6 * n6;
-    }
-    
-    public float getDX() {
-        return this.end.getX() - this.start.getX();
-    }
-    
-    public float getDY() {
-        return this.end.getY() - this.start.getY();
-    }
-    
-    @Override
-    public float getX() {
-        return this.getX1();
-    }
-    
-    @Override
-    public float getY() {
-        return this.getY1();
-    }
-    
-    public float getX1() {
-        return this.start.getX();
-    }
-    
-    public float getY1() {
-        return this.start.getY();
-    }
-    
-    public float getX2() {
-        return this.end.getX();
-    }
-    
-    public float getY2() {
-        return this.end.getY();
-    }
-    
-    public float distance(final Class224 class224) {
-        return (float)Math.sqrt(this.distanceSquared(class224));
-    }
-    
-    public boolean on(final Class224 class224) {
-        this.getClosestPoint(class224, this.closest);
-        return class224.equals(this.closest);
-    }
-    
-    public float distanceSquared(final Class224 class224) {
-        this.getClosestPoint(class224, this.closest);
-        this.closest.sub(class224);
-        return this.closest.lengthSquared();
-    }
-    
-    public void getClosestPoint(final Class224 class224, final Class224 class225) {
-        this.loc.set(class224);
-        this.loc.sub(this.start);
-        final float n = this.vec.dot(this.loc) / this.vec.lengthSquared();
-        if (n < 0.0f) {
-            class225.set(this.start);
-            return;
+        vector3d.y = y + (randomFloat2 - vector3d2.y);
+        final double z = vector3d.z;
+        Class303 class100 = this;
+        float randomFloat3 = 0.0f;
+        Label_0117: {
+            if (array == null) {
+                if (!this.aac) {
+                    randomFloat3 = 0.0f;
+                    break Label_0117;
+                }
+                class100 = this;
+            }
+            randomFloat3 = class100.randomFloat(-0.75f, 0.75f);
         }
-        if (n > 1.0f) {
-            class225.set(this.end);
-            return;
-        }
-        class225.x = this.start.getX() + n * this.vec.getX();
-        class225.y = this.start.getY() + n * this.vec.getY();
+        vector3d.z = z + (randomFloat3 - vector3d2.z);
+        final double hypot = Math.hypot(vector3d.x, vector3d.z);
+        class97.yaw = (float)(Math.atan2(vector3d.z, vector3d.x) * 57.29577951308232) - 90.0f;
+        class97.pitch = -(float)(Math.atan2(vector3d.y, hypot) * 57.29577951308232);
+        return class97.constrantAngle();
     }
     
-    @Override
-    public String toString() {
-        return "[Line " + this.start + "," + this.end + "]";
+    public final Class97 smoothAngle(Class97 constrantAngle, final Class97 class97) {
+        final Class97 class98 = constrantAngle = new Class97(class97.yaw - constrantAngle.yaw, class97.pitch - constrantAngle.pitch).constrantAngle();
+        class98.yaw = class97.yaw - constrantAngle.yaw / 100.0f * this.smooth;
+        constrantAngle.pitch = class97.pitch - constrantAngle.pitch / 100.0f * this.smooth;
+        return constrantAngle.constrantAngle();
     }
     
-    public Class224 intersect(final Class303 class303) {
-        return this.intersect(class303, false);
+    private float randomFloat(final float n, final float n2) {
+        return n + this.random.nextFloat() * (n2 - n);
     }
     
-    public Class224 intersect(final Class303 class303, final boolean b) {
-        final Class224 class304 = new Class224();
-        if (!this.intersect(class303, b, class304)) {
-            return null;
-        }
-        return class304;
+    static {
+        Class169.a(1885694621334071587L, 8317254838889913966L, MethodHandles.lookup().lookupClass()).a(38652052401437L);
     }
     
-    public boolean intersect(final Class303 class303, final boolean b, final Class224 class304) {
-        final float n = this.end.getX() - this.start.getX();
-        final float n2 = class303.end.getX() - class303.start.getX();
-        final float n3 = this.end.getY() - this.start.getY();
-        final float n4 = class303.end.getY() - class303.start.getY();
-        final float n5 = n4 * n - n2 * n3;
-        if (n5 == 0.0f) {
-            return false;
-        }
-        final float n6 = (n2 * (this.start.getY() - class303.start.getY()) - n4 * (this.start.getX() - class303.start.getX())) / n5;
-        final float n7 = (n * (this.start.getY() - class303.start.getY()) - n3 * (this.start.getX() - class303.start.getX())) / n5;
-        if (b && (n6 < 0.0f || n6 > 1.0f || n7 < 0.0f || n7 > 1.0f)) {
-            return false;
-        }
-        final float n8 = n6;
-        class304.set(this.start.getX() + n8 * (this.end.getX() - this.start.getX()), this.start.getY() + n8 * (this.end.getY() - this.start.getY()));
-        return true;
-    }
-    
-    @Override
-    protected void createPoints() {
-        (this.points = new float[4])[0] = this.getX1();
-        this.points[1] = this.getY1();
-        this.points[2] = this.getX2();
-        this.points[3] = this.getY2();
-    }
-    
-    @Override
-    public Class186 transform(final Class141 class141) {
-        final float[] array = new float[4];
-        this.createPoints();
-        class141.transform(this.points, 0, array, 0, 2);
-        return new Class303(array[0], array[1], array[2], array[3]);
-    }
-    
-    @Override
-    public boolean closed() {
-        return false;
-    }
-    
-    @Override
-    public boolean intersects(final Class186 class186) {
-        if (class186 instanceof Class56) {
-            return class186.intersects(this);
-        }
-        return super.intersects(class186);
+    private static RuntimeException a(final RuntimeException ex) {
+        return ex;
     }
 }

@@ -1,159 +1,116 @@
 package ClassSub;
 
-import cn.Hanabi.*;
-import java.awt.*;
-import net.minecraft.client.*;
-import cn.Hanabi.utils.fontmanager.*;
-import net.minecraft.util.*;
-import org.lwjgl.opengl.*;
-import net.minecraft.client.renderer.*;
-import net.minecraft.client.gui.*;
+import java.util.*;
+import java.lang.invoke.*;
 
-public class Class84
+public final class Class84
 {
-    private String message;
-    private Class205 timer;
-    private double lastY;
-    private double posY;
-    private double width;
-    private double height;
-    private double animationX;
-    private int color;
-    private int imageWidth;
-    private Class307 t;
-    private long stayTime;
-    public static final boolean Cracked_By_Somebody_Dumped_BY_Ganga_SupportedbySucen;
+    private float minYawSmoothing;
+    private float maxYawSmoothing;
+    private float minPitchSmoothing;
+    private float maxPitchSmoothing;
+    private Class92<Float> delta;
+    private Class120 smoothedAngle;
+    private final Random random;
+    private float height;
+    private static final long a;
     
-    public Class84(final String s, final Class307 t) {
-        this.message = s;
-        (this.timer = new Class205()).reset();
-        this.width = Hanabi.INSTANCE.fontManager.comfortaa16.getStringWidth(s) + 35;
-        this.height = 20.0;
-        this.animationX = this.width;
-        this.stayTime = 1500L;
-        this.imageWidth = 16;
-        this.posY = -1.0;
-        this.t = t;
-        if (t.equals(Class307.INFO)) {
-            this.color = Class15.DARKGREY.c;
-        }
-        else if (t.equals(Class307.ERROR)) {
-            this.color = new Color(36, 36, 36).getRGB();
-        }
-        else if (t.equals(Class307.SUCCESS)) {
-            this.color = new Color(36, 36, 36).getRGB();
-        }
-        else if (t.equals(Class307.WARNING)) {
-            this.color = Class15.DARKGREY.c;
-        }
+    public Class84() {
+        super();
+        this.height = Class344.getRandomInRange$2548a25();
+        this.minYawSmoothing = 110.0f;
+        this.maxYawSmoothing = 120.0f;
+        this.minPitchSmoothing = 30.0f;
+        this.maxPitchSmoothing = 40.0f;
+        this.random = new Random();
+        this.delta = new Class92<Float>(0.0f, 0.0f, 0.0f);
+        this.smoothedAngle = new Class120(Float.valueOf(0.0f), Float.valueOf(0.0f));
     }
     
-    public void draw(final double posY, final double lastY) {
-        this.width = Hanabi.INSTANCE.fontManager.comfortaa15.getStringWidth(this.message) + 45;
-        this.height = 22.0;
-        this.imageWidth = 11;
-        this.lastY = lastY;
-        this.animationX = this.getAnimationState(this.animationX, this.isFinished() ? this.width : 0.0, Math.max(this.isFinished() ? 200.0 : 30.0, Math.abs(this.animationX - (this.isFinished() ? this.width : 0.0)) * 20.0) * 0.3);
-        if (this.posY == -1.0) {
-            this.posY = posY;
-        }
-        else {
-            this.posY = this.getAnimationState(this.posY, posY, 200.0);
-        }
-        final ScaledResolution scaledResolution = new ScaledResolution(Minecraft.getMinecraft());
-        final int n = (int)(scaledResolution.getScaledWidth() - this.width + this.animationX);
-        final int n2 = (int)(scaledResolution.getScaledWidth() + this.animationX);
-        int n3 = (int)this.posY - 22;
-        Class246.drawRect(n, n3, n2, (int)(n3 + this.height), Class120.reAlpha(this.color, 0.85f));
-        switch (Class210.$SwitchMap$cn$Hanabi$gui$notifications$Notification$Type[this.t.ordinal()]) {
-            case 1: {
-                Hanabi.INSTANCE.fontManager.icon25.drawString(HanabiFonts.ICON_NOTIFY_ERROR, n + 3, n3 + 4, Class15.WHITE.c);
-                break;
+    public final float randomFloat(final float n, final float n2) {
+        return n + this.random.nextFloat() * (n2 - n);
+    }
+    
+    public final Class120 calculateAngle(final Class92<Double> class92, final Class92<Double> class93) {
+        final Class120 class94 = new Class120(Float.valueOf(0.0f), Float.valueOf(0.0f));
+        final Class92<Float> delta = this.delta;
+        final Float value = class92.x.floatValue() - class93.x.floatValue();
+        final Class92<Float> class95 = delta;
+        delta.x = value;
+        final Class92<Float> class96 = class95;
+        final Float value2 = class92.y.floatValue() + this.height - (class93.y.floatValue() + this.height);
+        final Class92<Float> class97 = class96;
+        class96.y = value2;
+        class97.z = class92.z.floatValue() - class93.z.floatValue();
+        final double hypot = Math.hypot(this.delta.x.doubleValue(), this.delta.z.doubleValue());
+        final float n = (float)Math.atan2(this.delta.z.floatValue(), this.delta.x.floatValue());
+        final float n2 = (float)Math.atan2(this.delta.y.floatValue(), hypot);
+        final float n3 = n * 57.29578f - 90.0f;
+        final float n4 = -(n2 * 57.29578f);
+        final Class120 class98 = class94;
+        final Float value3 = n3;
+        final Class120 class99 = class98;
+        class98.x = (T)value3;
+        final Class120 class100 = class99;
+        final Float value4 = n4;
+        final Class120 class101 = class100;
+        class100.y = (T)value4;
+        return class101.constrantAngle();
+    }
+    
+    private void setHeight(final float height) {
+        this.height = height;
+    }
+    
+    public final Class120 smoothAngle(final Class120 class120, final Class120 class121, final float n, final float n2) {
+        final int[] b = Class139.b();
+        final Class120 smoothedAngle = this.smoothedAngle;
+        final float n3 = class121.getYaw() - class120.getYaw();
+        final float abs = Math.abs(class121.getYaw() - class120.getYaw());
+        float n4 = 5.0f;
+        float n5 = 0.0f;
+        Label_0109: {
+            if (b == null) {
+                if (abs <= 5.0f) {
+                    n5 = 0.0f;
+                    break Label_0109;
+                }
+                final float n6 = Math.abs(class121.getYaw() - class120.getYaw()) / Math.abs(class121.getYaw() - class120.getYaw()) * 2.0f;
+                n4 = 2.0f;
             }
-            case 2: {
-                Hanabi.INSTANCE.fontManager.icon25.drawString(HanabiFonts.ICON_NOTIFY_INFO, n + 3, n3 + 4, Class15.WHITE.c);
-                break;
-            }
-            case 3: {
-                Hanabi.INSTANCE.fontManager.icon25.drawString(HanabiFonts.ICON_NOTIFY_SUCCESS, n + 3, n3 + 4, Class15.WHITE.c);
-                break;
-            }
-            case 4: {
-                Hanabi.INSTANCE.fontManager.icon25.drawString(HanabiFonts.ICON_NOTIFY_WARN, n + 3, n3 + 4, Class15.WHITE.c);
-                break;
-            }
+            n5 = abs / n4;
         }
-        ++n3;
-        if (this.message.contains(" Enabled")) {
-            Hanabi.INSTANCE.fontManager.comfortaa15.drawString(this.message.replace(" Enabled", ""), n + 19, (float)(n3 + this.height / 4.0), -1);
-            Hanabi.INSTANCE.fontManager.comfortaa15.drawString(" Enabled", n + 20 + Hanabi.INSTANCE.fontManager.comfortaa15.getStringWidth(this.message.replace(" Enabled", "")), (float)(n3 + this.height / 4.0), Class15.GREY.c);
-        }
-        else if (this.message.contains(" Disabled")) {
-            Hanabi.INSTANCE.fontManager.comfortaa15.drawString(this.message.replace(" Disabled", ""), n + 19, (float)(n3 + this.height / 4.0), -1);
-            Hanabi.INSTANCE.fontManager.comfortaa15.drawString(" Disabled", n + 20 + Hanabi.INSTANCE.fontManager.comfortaa15.getStringWidth(this.message.replace(" Disabled", "")), (float)(n3 + this.height / 4.0), Class15.GREY.c);
-        }
-        else {
-            Hanabi.INSTANCE.fontManager.comfortaa15.drawString(this.message, n + 20, (float)(n3 + this.height / 4.0), -1);
-        }
+        final Float value = n3 - n5;
+        final Class120 class122 = smoothedAngle;
+        smoothedAngle.x = (T)value;
+        final Class120 class123 = class122;
+        final Float value2 = class121.getPitch() - class120.getPitch();
+        final Class120 class124 = class123;
+        class123.y = (T)value2;
+        final Class120 constrantAngle = class124.constrantAngle();
+        final Float value3 = class121.getYaw() - this.smoothedAngle.getYaw() / n2 * this.randomFloat(this.minYawSmoothing, this.maxYawSmoothing);
+        final Class120 class125 = constrantAngle;
+        constrantAngle.x = (T)value3;
+        final Class120 constrantAngle2 = class125.constrantAngle();
+        final Float value4 = class121.getPitch() - this.smoothedAngle.getPitch() / n * this.randomFloat(this.minPitchSmoothing, this.maxPitchSmoothing);
+        final Class120 class126 = constrantAngle2;
+        constrantAngle2.y = (T)value4;
+        return class126.constrantAngle();
     }
     
-    public boolean shouldDelete() {
-        return this.isFinished() && this.animationX >= this.width;
+    static {
+        Class169.a(346166623799942980L, 6493228397295125588L, MethodHandles.lookup().lookupClass()).a(274353598767718L);
     }
     
-    private boolean isFinished() {
-        return this.timer.isDelayComplete(this.stayTime) && this.posY == this.lastY;
+    private static RuntimeException a(final RuntimeException ex) {
+        return ex;
     }
     
-    public double getHeight() {
-        return this.height;
+    private static boolean llIIlIlIII(final int n) {
+        return n > 0;
     }
     
-    public double getAnimationState(double n, final double n2, final double n3) {
-        final float n4 = (float)(Class246.delta * n3);
-        if (n < n2) {
-            if (n + n4 < n2) {
-                n += n4;
-            }
-            else {
-                n = n2;
-            }
-        }
-        else if (n - n4 > n2) {
-            n -= n4;
-        }
-        else {
-            n = n2;
-        }
-        return n;
-    }
-    
-    public void drawImage(final ResourceLocation resourceLocation, final int n, final int n2, final int n3, final int n4) {
-        final ScaledResolution scaledResolution = new ScaledResolution(Minecraft.getMinecraft());
-        GL11.glDisable(2929);
-        GL11.glEnable(3042);
-        GL11.glDepthMask(false);
-        OpenGlHelper.glBlendFunc(770, 771, 1, 0);
-        GL11.glColor4f(1.0f, 1.0f, 1.0f, 1.0f);
-        Minecraft.getMinecraft().getTextureManager().bindTexture(resourceLocation);
-        Gui.drawModalRectWithCustomSizedTexture(n, n2, 0.0f, 0.0f, n3, n4, (float)n3, (float)n4);
-        GL11.glDepthMask(true);
-        GL11.glDisable(3042);
-        GL11.glEnable(2929);
-    }
-    
-    public enum Class307
-    {
-        SUCCESS, 
-        INFO, 
-        WARNING, 
-        ERROR;
-        
-        private static final Class307[] $VALUES;
-        public static final boolean Cracked_By_Somebody_Dumped_BY_Ganga_SupportedbySucen;
-        
-        static {
-            $VALUES = new Class307[] { Class307.SUCCESS, Class307.INFO, Class307.WARNING, Class307.ERROR };
-        }
+    private static int llIIlIIllI$2548a28(final float n) {
+        return fcmpl(n, 5.0f);
     }
 }

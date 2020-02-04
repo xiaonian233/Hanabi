@@ -1,39 +1,16 @@
 package ClassSub;
 
-import java.net.*;
 import java.io.*;
 
-public class Class124 extends Thread
+public interface Class124 extends Serializable
 {
-    public Socket socket;
-    public PrintWriter writer;
-    public static final boolean Cracked_By_Somebody_Dumped_BY_Ganga_SupportedbySucen;
+    int getTriangleCount();
     
-    @Override
-    public void run() {
-        new Class162(this).start();
-    Label_0015_Outer:
-        while (true) {
-            while (true) {
-                try {
-                    while (true) {
-                        Class203.processMessage(getSocketMessage(this.socket));
-                    }
-                }
-                catch (Exception ex) {
-                    if (Class203.heartBeatTimer.lastMs > 5000L) {
-                        Class203.heartBeatTimer.setLastMs(0);
-                        Class203.output("������Ϣʱ���ִ���" + ex.getMessage());
-                        ex.printStackTrace();
-                    }
-                    continue Label_0015_Outer;
-                }
-                continue;
-            }
-        }
-    }
+    float[] getTrianglePoint(final int p0, final int p1);
     
-    public static String getSocketMessage(final Socket socket) throws IOException {
-        return new BufferedReader(new InputStreamReader(socket.getInputStream(), "GBK")).readLine();
-    }
+    void addPolyPoint(final float p0, final float p1);
+    
+    void startHole();
+    
+    boolean triangulate();
 }

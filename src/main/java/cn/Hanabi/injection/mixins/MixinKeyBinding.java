@@ -5,18 +5,22 @@ import net.minecraft.client.settings.*;
 import org.spongepowered.asm.mixin.*;
 
 @Mixin({ KeyBinding.class })
-public class MixinKeyBinding implements IKeyBinding
+public final class MixinKeyBinding implements IKeyBinding
 {
     @Shadow
-    private boolean pressed;
+    private boolean field_74513_e;
     
-    @Override
-    public boolean getPress() {
-        return this.pressed;
+    public MixinKeyBinding() {
+        super();
     }
     
     @Override
-    public void setPress(final Boolean b) {
-        this.pressed = b;
+    public final boolean getPress() {
+        return this.field_74513_e;
+    }
+    
+    @Override
+    public final void setPress(final Boolean b) {
+        this.field_74513_e = b;
     }
 }

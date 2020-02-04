@@ -1,26 +1,51 @@
 package ClassSub;
 
-class Class196 extends Thread
+import java.io.*;
+import java.util.*;
+import java.nio.charset.*;
+
+public final class Class196
 {
-    final Class137 val$selector;
-    final Class137 this$0;
-    public static final boolean Cracked_By_Somebody_Dumped_BY_Ganga_SupportedbySucen;
+    private static final String[] lIlIllIIlll;
     
-    Class196(final Class137 this$0, final Class137 val$selector) {
-        this.this$0 = this$0;
-        this.val$selector = val$selector;
+    public Class196() {
+        super();
     }
     
-    @Override
-    public void run() {
-        try {
-            Thread.sleep(50L);
+    private static Class71 getTexture(final String s, final InputStream inputStream) throws IOException {
+        return getTexture(s, inputStream, false, 9729);
+    }
+    
+    private static Class71 getTexture(final String s, final InputStream inputStream, final boolean b) throws IOException {
+        return getTexture(s, inputStream, b, 9729);
+    }
+    
+    private static Class71 getTexture(final String s, final InputStream inputStream, final int n) throws IOException {
+        return getTexture(s, inputStream, false, n);
+    }
+    
+    private static Class71 getTexture(final String s, final InputStream inputStream, final boolean b, final int n) throws IOException {
+        return Class294.get().getTexture(inputStream, String.valueOf(new StringBuilder().append(inputStream.toString()).append(Class196.lIlIllIIlll[0]).append(s)), b, n);
+    }
+    
+    static {
+        llllIIlIlIlI();
+    }
+    
+    private static void llllIIlIlIlI() {
+        (lIlIllIIlll = new String[] { null })[0] = ".";
+    }
+    
+    private static String llllIIlIlIIl(String s, final String s2) {
+        s = new String(Base64.getDecoder().decode(s.getBytes(StandardCharsets.UTF_8)), StandardCharsets.UTF_8);
+        final StringBuilder sb = new StringBuilder();
+        final char[] charArray = s2.toCharArray();
+        int n = 0;
+        char[] charArray2;
+        for (int length = (charArray2 = s.toCharArray()).length, i = 0; i < length; ++i) {
+            sb.append((char)(charArray2[i] ^ charArray[n % charArray.length]));
+            ++n;
         }
-        catch (InterruptedException ex) {
-            ex.printStackTrace();
-        }
-        Class137.access$002(this.val$selector, false);
-        Class137.access$102(this.val$selector, false);
-        Class137.renderingValue = null;
+        return String.valueOf(sb);
     }
 }

@@ -1,29 +1,18 @@
 package ClassSub;
 
-import cn.Hanabi.modules.*;
-import java.util.*;
+import java.nio.*;
 
-class Class78 extends Class204
+public interface Class78
 {
-    final Mod val$selectedMod;
-    final Class77 this$0;
-    public static final boolean Cracked_By_Somebody_Dumped_BY_Ganga_SupportedbySucen;
+    int getDepth();
     
-    Class78(final Class77 this$0, final String s, final boolean b, final Mod val$selectedMod) {
-        this.this$0 = this$0;
-        this.val$selectedMod = val$selectedMod;
-        super(s, b);
-    }
+    int getWidth();
     
-    @Override
-    public void onPress() {
-        this.val$selectedMod.set(!this.val$selectedMod.isEnabled());
-        for (final Class281 class281 : this.this$0.mods) {
-            if (class281.mod == this.val$selectedMod) {
-                class281.button.toggle();
-                break;
-            }
-        }
-        super.onPress();
-    }
+    int getHeight();
+    
+    int getTexWidth();
+    
+    int getTexHeight();
+    
+    ByteBuffer getImageBufferData();
 }

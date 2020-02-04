@@ -1,124 +1,195 @@
 package ClassSub;
 
-import cn.Hanabi.*;
-import net.minecraft.client.*;
-import net.minecraft.client.gui.*;
-import org.lwjgl.opengl.*;
-import net.minecraft.util.*;
-import net.minecraft.client.renderer.*;
-import cn.Hanabi.utils.fontmanager.*;
+import java.util.*;
+import java.security.*;
+import java.math.*;
+import java.lang.invoke.*;
 
-public enum Class344
+public final class Class344
 {
-    INSTANCE;
+    private static final Random rng;
+    private static final long a;
     
-    public String ly;
-    public String tly;
-    public String downloadProgress;
-    public long readedSecs;
-    public long totalSecs;
-    public float animation;
-    public Class205 timer;
-    public boolean firstTime;
-    public Hanabi hanaInstance;
-    private static final Class344[] $VALUES;
-    public static final boolean Cracked_By_Somebody_Dumped_BY_Ganga_SupportedbySucen;
-    
-    private Class344() {
-        this.ly = "";
-        this.tly = "";
-        this.downloadProgress = "0";
-        this.readedSecs = 0L;
-        this.totalSecs = 0L;
-        this.animation = 0.0f;
-        this.timer = new Class205();
-        this.firstTime = true;
-        this.hanaInstance = Hanabi.INSTANCE;
+    public Class344() {
+        super();
     }
     
-    public void renderOverlay() {
-        final int intValue = (int)(Object)Class118.musicPosX.getValueState();
-        final int intValue2 = (int)(Object)Class118.musicPosY.getValueState();
-        final ScaledResolution scaledResolution = new ScaledResolution(Minecraft.getMinecraft());
-        if (this.hanaInstance.musicMgr.getCurrentTrack() != null && Class286.getInstance().getMediaPlayer() != null) {
-            this.readedSecs = (int)Class286.getInstance().getMediaPlayer().getCurrentTime().toSeconds();
-            this.totalSecs = (int)Class286.getInstance().getMediaPlayer().getStopTime().toSeconds();
+    private static boolean isInteger(final String s) {
+        try {
+            Integer.parseInt(s);
         }
-        if (this.hanaInstance.musicMgr.getCurrentTrack() != null && Class286.getInstance().getMediaPlayer() != null) {
-            this.hanaInstance.fontManager.wqy18.drawString(this.hanaInstance.musicMgr.getCurrentTrack().getName() + " - " + this.hanaInstance.musicMgr.getCurrentTrack().getArtists(), 36.0f + intValue, 10 + intValue2, Class15.WHITE.c);
-            this.hanaInstance.fontManager.wqy18.drawString(this.formatSeconds((int)this.readedSecs) + "/" + this.formatSeconds((int)this.totalSecs), 36.0f + intValue, 20 + intValue2, -1);
-            if (Class286.getInstance().circleLocations.containsKey(this.hanaInstance.musicMgr.getCurrentTrack().getId())) {
-                GL11.glPushMatrix();
-                GL11.glColor4f(1.0f, 1.0f, 1.0f, 1.0f);
-                Class246.drawImage(this.hanaInstance.musicMgr.circleLocations.get(this.hanaInstance.musicMgr.getCurrentTrack().getId()), 4 + intValue, 6 + intValue2, 28, 28);
-                GL11.glPopMatrix();
-            }
-            else {
-                Class286.getInstance().getCircle(this.hanaInstance.musicMgr.getCurrentTrack());
-            }
-            try {
-                final float n = (float)(Class286.getInstance().getMediaPlayer().getCurrentTime().toSeconds() / Math.max(1.0, Class286.getInstance().getMediaPlayer().getStopTime().toSeconds())) * 100.0f;
-                Class246.drawArc(18 + intValue, 19 + intValue2, 14.0, Class15.WHITE.c, 0, 360.0, 4);
-                Class246.drawArc(18 + intValue, 19 + intValue2, 14.0, Class15.BLUE.c, 180, 180.0f + n * 3.6f, 4);
-            }
-            catch (Exception ex) {}
+        catch (NumberFormatException ex) {
+            return false;
         }
-        final UnicodeFontRenderer wqy25 = Hanabi.INSTANCE.fontManager.wqy25;
-        final int intValue3 = (int)(Object)Class118.musicPosYlyr.getValueState();
-        wqy25.drawCenterOutlinedString(this.ly, scaledResolution.getScaledWidth() / 2.0f - 0.5f, scaledResolution.getScaledHeight() - 120 - 80 + intValue3, Class286.instance.tLyric.isEmpty() ? -7520544 : -49273, Class286.instance.tLyric.isEmpty() ? -1515777 : -8481);
-        wqy25.drawCenterOutlinedString(this.tly, scaledResolution.getScaledWidth() / 2.0f, scaledResolution.getScaledHeight() - 100 + 0.5f - 80.0f + intValue3, -49273, -8481);
-        if (Class286.showMsg) {
-            if (this.firstTime) {
-                this.timer.reset();
-                this.firstTime = false;
-            }
-            final UnicodeFontRenderer wqy26 = Hanabi.INSTANCE.fontManager.wqy18;
-            final UnicodeFontRenderer wqy27 = Hanabi.INSTANCE.fontManager.wqy25;
-            final float n2 = wqy26.getStringWidth(this.hanaInstance.musicMgr.getCurrentTrack().getName());
-            final float n3 = wqy27.getStringWidth("正在播放");
-            final float n4 = (n2 > n3) ? n2 : n3;
-            Class246.drawRect(scaledResolution.getScaledWidth() - this.animation - 50.0f, 5.0f, scaledResolution.getScaledWidth(), 40.0f, Class120.reAlpha(Class15.BLACK.c, 0.7f));
-            if (Class286.getInstance().circleLocations.containsKey(this.hanaInstance.musicMgr.getCurrentTrack().getId())) {
-                GL11.glPushMatrix();
-                GL11.glColor4f(1.0f, 1.0f, 1.0f, 1.0f);
-                Class246.drawImage(this.hanaInstance.musicMgr.circleLocations.get(this.hanaInstance.musicMgr.getCurrentTrack().getId()), scaledResolution.getScaledWidth() - this.animation - 45.0f, 8.0f, 28.0f, 28.0f);
-                GL11.glPopMatrix();
-            }
-            else {
-                Class286.getInstance().getCircle(this.hanaInstance.musicMgr.getCurrentTrack());
-            }
-            Class246.drawArc(scaledResolution.getScaledWidth() - this.animation - 31.0f, 22.0f, 14.0, Class15.WHITE.c, 0, 360.0, 2);
-            wqy27.drawString("正在播放", scaledResolution.getScaledWidth() - this.animation - 12.0f, 8.0f, Class15.WHITE.c);
-            wqy26.drawString(this.hanaInstance.musicMgr.getCurrentTrack().getName(), scaledResolution.getScaledWidth() - this.animation - 12.0f, 26.0f, Class15.WHITE.c);
-            if (this.timer.isDelayComplete(5000L)) {
-                this.animation = (float)Class246.getAnimationState(this.animation, -(n4 + 50.0f), 300.0);
-                if (this.animation <= -(n4 + 50.0f)) {
-                    Class286.showMsg = false;
-                    this.firstTime = true;
-                }
-            }
-            else {
-                this.animation = (float)Class246.getAnimationState(this.animation, n4, 300.0);
-            }
+        catch (NullPointerException ex2) {
+            return false;
         }
-        GlStateManager.resetColor();
+        return true;
     }
     
-    public String formatSeconds(int n) {
-        String string = "";
-        final int n2 = n / 60;
-        if (n2 < 10) {
-            string += "0";
+    private static Double clamp(final double n, final double n2, final double n3) {
+        final int[] b = Class139.b();
+        final double n4 = dcmpg(n, n2);
+        if (b == null) {
+            if (n4 < 0) {
+                return n2;
+            }
+            final double n5 = n;
+            if (b != null) {
+                return n5;
+            }
+            final double n6 = dcmpl(n, n3);
         }
-        String s = string + n2 + ":";
-        n %= 60;
-        if (n < 10) {
-            s += "0";
+        if (n4 > 0) {
+            return n3;
         }
-        return s + n;
+        return n;
+    }
+    
+    private static Double getDifference(double n, double n2) {
+        final int[] b = Class139.b();
+        final double n3 = n;
+        double n4 = n2;
+        if (b == null) {
+            if (n3 > n2) {
+                final double n5 = n;
+                n = n2;
+                n2 = n5;
+            }
+            n4 = n;
+        }
+        return n3 - n4;
+    }
+    
+    private static float randomSeed(long n) {
+        n += System.currentTimeMillis();
+        return 0.4f + new Random(n).nextInt(80000000) / 1.0E9f + 1.45E-9f;
+    }
+    
+    private static float secRanFloat(final float n, final float n2) {
+        return new SecureRandom().nextFloat() * (n2 - n) + n;
+    }
+    
+    private static int randInt(final int n, final int n2) {
+        return new SecureRandom().nextInt() * (n2 - n) + n;
+    }
+    
+    private static double secRanDouble(final double n, final double n2) {
+        return new SecureRandom().nextDouble() * (n2 - n) + n;
+    }
+    
+    private static float getAngleDifference(float n, float n2) {
+        final int[] b = Class139.b();
+        n2 = Math.abs(n2 - n) % 360.0f;
+        final int[] array = b;
+        float n4;
+        final float n3 = n4 = n2;
+        float n5 = 180.0f;
+        if (array == null) {
+            n = n3;
+            if (n3 <= 180.0f) {
+                return n;
+            }
+            n4 = 360.0f;
+            n5 = n;
+        }
+        return n4 - n5;
+    }
+    
+    private static double getMiddle(final double n, final double n2) {
+        return (n + n2) / 2.0;
+    }
+    
+    private static float getMiddle(final float n, final float n2) {
+        return (n + n2) / 2.0f;
+    }
+    
+    private static double getMiddleint(final double n, final double n2) {
+        return (n + n2) / 2.0;
+    }
+    
+    private static int getRandom(final int n, final int n2) {
+        return n + Class344.rng.nextInt(n2 - n + 1);
+    }
+    
+    private static double getRandom(final double n, final double n2) {
+        return n + Class344.rng.nextInt((int)(n2 - n + 1.0));
+    }
+    
+    private static double getRandomInRange(final double n, final double n2) {
+        final Random random = new Random();
+        final double n3 = n2 - n;
+        final int[] b = Class139.b();
+        double n4 = random.nextDouble() * n3;
+        final int[] array = b;
+        final double n5 = n4;
+        double n6 = n2;
+        if (array == null) {
+            if (n5 > n2) {
+                n4 = n2;
+            }
+            n6 = n;
+        }
+        double n8;
+        double n7 = n8 = n5 + n6;
+        if (array == null) {
+            if (n7 > n2) {
+                n7 = n2;
+            }
+            n8 = n7;
+        }
+        return n8;
+    }
+    
+    public static float getRandomInRange$2548a25() {
+        return new Random().nextFloat() * 0.6999999f + 1.1f;
+    }
+    
+    private static int getRandomInRange(final int n, final int n2) {
+        return new Random().nextInt(n2 - n + 1) + n;
+    }
+    
+    private static double round(final double n, final int n2) {
+        if (n2 < 0) {
+            throw new IllegalArgumentException();
+        }
+        return new BigDecimal(n).setScale(n2, RoundingMode.HALF_UP).doubleValue();
     }
     
     static {
-        $VALUES = new Class344[] { Class344.INSTANCE };
+        Class169.a(399272208169106011L, 1389527446454809426L, MethodHandles.lookup().lookupClass()).a(163782576357950L);
+        rng = new Random();
+    }
+    
+    private static NumberFormatException a(final NumberFormatException ex) {
+        return ex;
+    }
+    
+    private static boolean lIlIIIIIll(final int n) {
+        return n < 0;
+    }
+    
+    private static boolean lIlIIIIlII(final int n) {
+        return n > 0;
+    }
+    
+    private static int lIlIIIIIIl(final double n, final double n2) {
+        return dcmpl(n, n2);
+    }
+    
+    private static int lIlIIIIIII(final double n, final double n2) {
+        return dcmpg(n, n2);
+    }
+    
+    private static int lIlIIIIlIl(final double n, final double n2) {
+        return dcmpl(n, n2);
+    }
+    
+    private static int lIlIIIIllI$2548a28(final float n) {
+        return fcmpl(n, 180.0f);
+    }
+    
+    private static int lIlIIIIlll(final double n, final double n2) {
+        return dcmpl(n, n2);
     }
 }

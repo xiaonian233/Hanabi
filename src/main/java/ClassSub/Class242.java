@@ -1,47 +1,117 @@
 package ClassSub;
 
-import cn.Hanabi.events.*;
-import cn.Hanabi.modules.Combat.*;
-import net.minecraft.network.play.client.*;
-import net.minecraft.network.*;
-import net.minecraft.entity.player.*;
+import org.jetbrains.annotations.*;
+import org.lwjgl.opengl.*;
+import net.minecraft.client.*;
+import net.minecraft.client.gui.*;
+import java.util.*;
+import java.lang.invoke.*;
 
-class Class242 extends Thread
+public final class Class242<T>
 {
-    final EventAttack val$e;
-    final TPHit this$0;
-    public static final boolean Cracked_By_Somebody_Dumped_BY_Ganga_SupportedbySucen;
+    @NotNull
+    List<Class306<T>> subTabs;
+    String text;
+    private static final long a;
     
-    Class242(final TPHit this$0, final EventAttack val$e) {
-        this.this$0 = this$0;
-        this.val$e = val$e;
+    public Class242(final String text) {
+        super();
+        this.subTabs = new ArrayList<Class306<T>>();
+        this.text = text;
     }
     
-    @Override
-    public void run() {
-        try {
-            Thread.sleep(10L);
+    private void addSubTab(final Class306<T> class306) {
+        this.subTabs.add(class306);
+    }
+    
+    @NotNull
+    private List<Class306<T>> getSubTabs() {
+        return this.subTabs;
+    }
+    
+    private void renderSubTabs(final int n, final int n2, final int n3) {
+        GL11.glTranslated((double)n, (double)n2, 0.0);
+        final FontRenderer field_71466_p = Minecraft.func_71410_x().field_71466_p;
+        final int[] b = Class139.b();
+        final int n4 = (field_71466_p.field_78288_b + 3) * this.subTabs.size();
+        int n5 = 0;
+        final Iterator<Class306<T>> iterator = this.subTabs.iterator();
+        final int[] array = b;
+        while (true) {
+            while (iterator.hasNext()) {
+                final Class306<T> class306 = iterator.next();
+                final int func_78256_a;
+                final int n6 = func_78256_a = field_71466_p.func_78256_a(class306.text);
+                Label_0122: {
+                    if (array == null) {
+                        final int n7 = n5;
+                        if (array != null) {
+                            Class145.drawRect(func_78256_a, n7, 0, n5, n4, Class145.BORDER.getRGB());
+                            int n8 = 2;
+                            int n9 = 0;
+                            while (true) {
+                                for (final Class306<T> class307 : this.subTabs) {
+                                    final int n10 = n3;
+                                    int n11 = n3;
+                                    if (array != null) {
+                                        GL11.glTranslated((double)n10, (double)(-n2), 0.0);
+                                        return;
+                                    }
+                                    final int n12 = n9;
+                                    if (array == null) {
+                                        if (n3 == n12) {
+                                            Class145.drawRect(7, 0, n8 - 2, n5, n8 + field_71466_p.field_78288_b + 3 - 1, Class145.SELECTED.getRGB());
+                                        }
+                                        field_71466_p.func_78276_b(class307.text, 2, n8, Class145.FOREGROUND.getRGB());
+                                        n11 = n8;
+                                        final int n13 = field_71466_p.field_78288_b + 3;
+                                    }
+                                    n8 = n11 + n12;
+                                    ++n9;
+                                    if (array != null) {
+                                        break;
+                                    }
+                                }
+                                final int n10 = -n;
+                                continue;
+                            }
+                        }
+                        if (n6 <= n7) {
+                            break Label_0122;
+                        }
+                        field_71466_p.func_78256_a(class306.text);
+                    }
+                    n5 = n6;
+                }
+                if (array != null) {
+                    break;
+                }
+            }
+            n5 += 4;
+            Class145.drawRect(7, 0, 0, n5, n4, Class145.BACKGROUND.getRGB());
+            GL11.glLineWidth(1.0f);
+            int func_78256_a = 2;
+            continue;
         }
-        catch (InterruptedException ex) {
-            ex.printStackTrace();
-        }
-        final int getX = this.val$e.getEntity().getPosition().getX();
-        final int getY = this.val$e.getEntity().getPosition().getY();
-        final int getZ = this.val$e.getEntity().getPosition().getZ();
-        final double n = getX - TPHit.access$000().thePlayer.posX + 0.5;
-        final double n2 = getY - TPHit.access$100().thePlayer.posY + 0.08;
-        final double n3 = getZ - TPHit.access$200().thePlayer.posZ + 0.5;
-        final double ceil = Math.ceil(Math.sqrt(Math.pow(n, 2.0) + Math.pow(n2, 2.0) + Math.pow(n3, 2.0)) / 9.8);
-        TPHit.access$600().getNetHandler().getNetworkManager().sendPacket((Packet)new C03PacketPlayer.C04PacketPlayerPosition(TPHit.access$300().thePlayer.posX, TPHit.access$400().thePlayer.posY - 0.32, TPHit.access$500().thePlayer.posZ, false));
-        TPHit.access$1000().getNetHandler().getNetworkManager().sendPacket((Packet)new C03PacketPlayer.C04PacketPlayerPosition(TPHit.access$700().thePlayer.posX, TPHit.access$800().thePlayer.posY - 0.32, TPHit.access$900().thePlayer.posZ, false));
-        TPHit.access$1400().getNetHandler().getNetworkManager().sendPacket((Packet)new C03PacketPlayer.C04PacketPlayerPosition(TPHit.access$1100().thePlayer.posX, TPHit.access$1200().thePlayer.posY, TPHit.access$1300().thePlayer.posZ, false));
-        TPHit.access$1800().getNetHandler().getNetworkManager().sendPacket((Packet)new C03PacketPlayer.C04PacketPlayerPosition(TPHit.access$1500().thePlayer.posX, TPHit.access$1600().thePlayer.posY, TPHit.access$1700().thePlayer.posZ, false));
-        TPHit.access$2200().getNetHandler().getNetworkManager().sendPacket((Packet)new C03PacketPlayer.C04PacketPlayerPosition(TPHit.access$1900().thePlayer.posX, TPHit.access$2000().thePlayer.posY + 1.1, TPHit.access$2100().thePlayer.posZ, false));
-        TPHit.access$2600().getNetHandler().getNetworkManager().sendPacket((Packet)new C03PacketPlayer.C04PacketPlayerPosition(TPHit.access$2300().thePlayer.posX, TPHit.access$2400().thePlayer.posY + 1.1, TPHit.access$2500().thePlayer.posZ, false));
-        for (int n4 = 1; n4 <= ceil; ++n4) {
-            TPHit.access$3000().getNetHandler().getNetworkManager().sendPacket((Packet)new C03PacketPlayer.C04PacketPlayerPosition(TPHit.access$2700().thePlayer.posX + n / ceil * n4, TPHit.access$2800().thePlayer.posY + n2 / ceil * n4, TPHit.access$2900().thePlayer.posZ + n3 / ceil * n4, false));
-        }
-        TPHit.access$3200().playerController.attackEntity((EntityPlayer)TPHit.access$3100().thePlayer, this.val$e.getEntity());
-        TPHit.access$3300().thePlayer.swingItem();
+    }
+    
+    private String getText() {
+        return this.text;
+    }
+    
+    private void setText(final String text) {
+        this.text = text;
+    }
+    
+    static {
+        Class169.a(724451533684554618L, 3941137183580925423L, MethodHandles.lookup().lookupClass()).a(126165607489040L);
+    }
+    
+    private static RuntimeException a(final RuntimeException ex) {
+        return ex;
+    }
+    
+    private static boolean lllIIlIlIIll(final int n, final int n2) {
+        return n > n2;
     }
 }

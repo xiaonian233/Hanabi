@@ -1,9 +1,9 @@
 package cn.Hanabi.injection.mixins;
 
 import cn.Hanabi.injection.interfaces.*;
+import io.netty.channel.*;
 import org.spongepowered.asm.mixin.*;
 import java.util.*;
-import io.netty.channel.*;
 import net.minecraft.network.*;
 import org.spongepowered.asm.mixin.injection.callback.*;
 import com.darkmagician6.eventapi.types.*;
@@ -17,53 +17,40 @@ import io.netty.util.concurrent.*;
 public abstract class MixinNetworkManager implements INetworkManager
 {
     @Shadow
-    private Channel channel;
+    private Channel field_150746_k;
     @Shadow
-    private Queue outboundPacketsQueue;
+    private Queue field_150745_j;
+    
+    public MixinNetworkManager() {
+        super();
+    }
     
     @Inject(method = { "channelRead0" }, at = { @At(value = "INVOKE", target = "Lnet/minecraft/network/Packet;processPacket(Lnet/minecraft/network/INetHandler;)V", shift = At.Shift.BEFORE) }, cancellable = true)
-    private void packetReceived(final ChannelHandlerContext p_channelRead0_1_, final Packet packet, final CallbackInfo ci) {
-        final EventPacket event = new EventPacket(EventType.RECIEVE, packet);
-        EventManager.call(event);
-        if (event.isCancelled()) {
-            ci.cancel();
+    private static void packetReceived$7e29475e(final Packet packet, final CallbackInfo callbackInfo) {
+        final EventPacket eventPacket;
+        EventManager.call(eventPacket = new EventPacket(EventType.RECIEVE, packet));
+        if (eventPacket.isCancelled()) {
+            callbackInfo.cancel();
         }
     }
     
     @Inject(method = { "sendPacket(Lnet/minecraft/network/Packet;)V" }, at = { @At("HEAD") }, cancellable = true)
-    private void sendPacket(final Packet packetIn, final CallbackInfo ci) {
-        final EventPacket event = new EventPacket(EventType.SEND, packetIn);
-        EventManager.call(event);
-        if (event.isCancelled()) {
-            ci.cancel();
+    private static void sendPacket(final Packet packet, final CallbackInfo callbackInfo) {
+        final EventPacket eventPacket;
+        EventManager.call(eventPacket = new EventPacket(EventType.SEND, packet));
+        if (eventPacket.isCancelled()) {
+            callbackInfo.cancel();
         }
     }
     
     @Override
-    public void sendPacketNoEvent(final Packet a) {
-        if (this.channel != null && this.channel.isOpen()) {
-            final GenericFutureListener[] a2 = null;
-            this.flushOutboundQueue();
-            this.dispatchPacket(a, a2);
-            return;
-        }
-        this.outboundPacketsQueue.add(new InboundHandlerTuplePacketListener(a, (GenericFutureListener<? extends Future<? super Void>>[])null));
+    public final void sendPacketNoEvent$37e9f079() {
+        null.add(new InboundHandlerTuplePacketListener());
     }
     
     @Shadow
-    protected abstract void dispatchPacket(final Packet p0, final GenericFutureListener[] p1);
+    protected abstract void func_150732_b$3d6aa510();
     
     @Shadow
-    protected abstract void flushOutboundQueue();
-    
-    static class InboundHandlerTuplePacketListener
-    {
-        private final Packet packet;
-        private final GenericFutureListener<? extends Future<? super Void>>[] futureListeners;
-        
-        public InboundHandlerTuplePacketListener(final Packet inPacket, final GenericFutureListener<? extends Future<? super Void>>... inFutureListeners) {
-            this.packet = inPacket;
-            this.futureListeners = inFutureListeners;
-        }
-    }
+    protected abstract void func_150733_h();
 }

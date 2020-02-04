@@ -1,46 +1,14 @@
 package ClassSub;
 
-import java.nio.*;
-import org.lwjgl.*;
-
-public class Class117 implements Class257
+final class Class117
 {
-    private int width;
-    private int height;
-    public static final boolean Cracked_By_Somebody_Dumped_BY_Ganga_SupportedbySucen;
+    int[] v;
+    private Class11 this$0;
     
-    public Class117(final int width, final int height) {
-        this.width = width;
-        this.height = height;
-    }
-    
-    @Override
-    public int getDepth() {
-        return 32;
-    }
-    
-    @Override
-    public int getHeight() {
-        return this.height;
-    }
-    
-    @Override
-    public ByteBuffer getImageBufferData() {
-        return BufferUtils.createByteBuffer(this.getTexWidth() * this.getTexHeight() * 4);
-    }
-    
-    @Override
-    public int getTexHeight() {
-        return Class144.get2Fold(this.height);
-    }
-    
-    @Override
-    public int getTexWidth() {
-        return Class144.get2Fold(this.width);
-    }
-    
-    @Override
-    public int getWidth() {
-        return this.width;
+    Class117(final int n, final int n2, final int n3) {
+        super();
+        (this.v = new int[3])[0] = n;
+        this.v[1] = n2;
+        this.v[2] = n3;
     }
 }

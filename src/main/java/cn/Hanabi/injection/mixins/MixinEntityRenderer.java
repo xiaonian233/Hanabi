@@ -2,161 +2,220 @@ package cn.Hanabi.injection.mixins;
 
 import cn.Hanabi.injection.interfaces.*;
 import net.minecraft.client.*;
+import net.minecraft.entity.*;
 import net.minecraft.client.shader.*;
 import net.minecraft.client.resources.*;
 import org.apache.logging.log4j.*;
 import net.minecraft.client.renderer.*;
 import java.io.*;
 import com.google.gson.*;
-import org.spongepowered.asm.mixin.injection.callback.*;
 import cn.Hanabi.events.*;
 import com.darkmagician6.eventapi.*;
 import com.darkmagician6.eventapi.events.*;
 import org.lwjgl.opengl.*;
 import org.spongepowered.asm.mixin.injection.*;
-import cn.Hanabi.modules.*;
+import ClassSub.*;
 import cn.Hanabi.modules.Combat.*;
 import com.google.common.base.*;
-import net.minecraft.entity.*;
-import net.minecraft.entity.item.*;
-import java.util.*;
+import net.minecraft.client.multiplayer.*;
 import net.minecraft.util.*;
 import org.spongepowered.asm.mixin.*;
+import javax.crypto.*;
+import java.nio.charset.*;
+import javax.crypto.spec.*;
+import java.security.*;
+import java.util.*;
 
 @Mixin({ EntityRenderer.class })
 public abstract class MixinEntityRenderer implements IEntityRenderer
 {
     @Shadow
-    private Minecraft mc;
+    private Minecraft field_78531_r;
     @Shadow
-    private Entity pointedEntity;
+    private Entity field_78528_u;
     @Shadow
-    private int shaderIndex;
+    private int field_147713_ae;
     @Shadow
-    private boolean useShader;
+    private boolean field_175083_ad;
     @Shadow
-    private ShaderGroup theShaderGroup;
+    private ShaderGroup field_147707_d;
     @Shadow
-    private IResourceManager resourceManager;
+    private IResourceManager field_147711_ac;
     @Shadow
-    private static Logger logger;
+    private static Logger field_147710_q;
     @Shadow
-    public static int shaderCount;
+    private static int field_147708_e;
+    private static final String[] lIlIIIIl;
+    
+    public MixinEntityRenderer() {
+        super();
+    }
     
     @Shadow
-    protected abstract void setupCameraTransform(final float p0, final int p1);
+    protected abstract void func_78479_a$2549578();
     
     @Override
-    public void runSetupCameraTransform(final float partialTicks, final int pass) {
-        this.setupCameraTransform(partialTicks, pass);
+    public final void runSetupCameraTransform$2549578() {
     }
     
     @Override
-    public void loadShader2(final ResourceLocation resourceLocationIn) {
-        if (OpenGlHelper.isFramebufferEnabled()) {
+    public final void loadShader2(final ResourceLocation resourceLocation) {
+        if (OpenGlHelper.func_148822_b()) {
+            final Minecraft minecraft = null;
             try {
-                (this.theShaderGroup = new ShaderGroup(this.mc.getTextureManager(), this.resourceManager, this.mc.getFramebuffer(), resourceLocationIn)).createBindFramebuffers(this.mc.displayWidth, this.mc.displayHeight);
-                this.useShader = true;
+                (this.field_147707_d = new ShaderGroup(minecraft.func_110434_K(), (IResourceManager)null, null.func_147110_a(), resourceLocation)).func_148026_a(null.field_71443_c, null.field_71440_d);
             }
-            catch (IOException ioexception) {
-                MixinEntityRenderer.logger.warn("Failed to load shader: " + resourceLocationIn, (Throwable)ioexception);
-                this.shaderIndex = MixinEntityRenderer.shaderCount;
-                this.useShader = false;
+            catch (IOException ex) {
+                null.warn(String.valueOf(new StringBuilder().append(MixinEntityRenderer.lIlIIIIl[0]).append(resourceLocation)), (Throwable)ex);
             }
-            catch (JsonSyntaxException jsonsyntaxexception) {
-                MixinEntityRenderer.logger.warn("Failed to load shader: " + resourceLocationIn, (Throwable)jsonsyntaxexception);
-                this.shaderIndex = MixinEntityRenderer.shaderCount;
-                this.useShader = false;
+            catch (JsonSyntaxException ex2) {
+                null.warn(String.valueOf(new StringBuilder().append(MixinEntityRenderer.lIlIIIIl[1]).append(resourceLocation)), (Throwable)ex2);
             }
         }
     }
     
     @Inject(method = { "renderWorldPass" }, at = { @At(value = "INVOKE", target = "Lnet/minecraft/client/renderer/GlStateManager;disableFog()V", shift = At.Shift.AFTER) })
-    private void eventRender3D(final int pass, final float partialTicks, final long finishTimeNano, final CallbackInfo callbackInfo) {
-        final EventRender eventRender = new EventRender(pass, partialTicks, finishTimeNano);
-        EventManager.call(eventRender);
+    private static void eventRender3D$c5244(final int n, final float n2, final long n3) {
+        EventManager.call(new EventRender(n, n2, n3));
         GL11.glColor3f(1.0f, 1.0f, 1.0f);
     }
     
     @Overwrite
-    public void getMouseOver(final float p_getMouseOver_1_) {
-        final Entity entity = this.mc.getRenderViewEntity();
-        if (entity != null && this.mc.theWorld != null) {
-            this.mc.mcProfiler.startSection("pick");
-            this.mc.pointedEntity = null;
-            double d0 = ModManager.getModule("Reach").getState() ? Reach.getReach() : this.mc.playerController.getBlockReachDistance();
-            this.mc.objectMouseOver = entity.rayTrace(ModManager.getModule("Reach").getState() ? Reach.getReach() : d0, p_getMouseOver_1_);
-            double d2 = d0;
-            final Vec3 vec3 = entity.getPositionEyes(p_getMouseOver_1_);
-            boolean flag = false;
-            if (this.mc.playerController.extendedReach()) {
-                d0 = 6.0;
-                d2 = 6.0;
+    private void func_78473_a(final float n) {
+        final Entity func_175606_aa;
+        if ((func_175606_aa = null.func_175606_aa()) != null && null.field_71441_e != null) {
+            null.field_71424_I.func_76320_a(MixinEntityRenderer.lIlIIIIl[2]);
+            double n2 = Class4.getModule(MixinEntityRenderer.lIlIIIIl[3]).state ? Reach.getReach() : null.field_71442_b.func_78757_d();
+            func_175606_aa.func_174822_a(Class4.getModule(MixinEntityRenderer.lIlIIIIl[4]).state ? Reach.getReach() : n2, n);
+            double n3 = n2;
+            final Vec3 func_174824_e = func_175606_aa.func_174824_e(n);
+            boolean b = false;
+            if (null.field_71442_b.func_78749_i()) {
+                n2 = 6.0;
+                n3 = 6.0;
             }
-            else if (d0 > 3.0) {
-                flag = true;
+            else if (n2 > 3.0) {
+                b = true;
             }
-            if (this.mc.objectMouseOver != null) {
-                d2 = this.mc.objectMouseOver.hitVec.distanceTo(vec3);
+            if (null.field_71476_x != null) {
+                n3 = null.field_71476_x.field_72307_f.func_72438_d(func_174824_e);
             }
-            if (ModManager.getModule("Reach").getState()) {
-                d2 = Reach.getReach();
-                final MovingObjectPosition vec4 = entity.rayTrace(d2, p_getMouseOver_1_);
-                if (vec4 != null) {
-                    d2 = vec4.hitVec.distanceTo(vec3);
+            if (Class4.getModule(MixinEntityRenderer.lIlIIIIl[5]).state) {
+                n3 = Reach.getReach();
+                final MovingObjectPosition func_174822_a;
+                if ((func_174822_a = func_175606_aa.func_174822_a(n3, n)) != null) {
+                    n3 = func_174822_a.field_72307_f.func_72438_d(func_174824_e);
                 }
             }
-            final Vec3 var24 = entity.getLook(p_getMouseOver_1_);
-            final Vec3 vec5 = vec3.addVector(var24.xCoord * d0, var24.yCoord * d0, var24.zCoord * d0);
-            this.pointedEntity = null;
-            Vec3 vec6 = null;
-            final float f = 1.0f;
-            final List list = this.mc.theWorld.getEntitiesInAABBexcluding(entity, entity.getEntityBoundingBox().addCoord(var24.xCoord * d0, var24.yCoord * d0, var24.zCoord * d0).expand((double)f, (double)f, (double)f), Predicates.and(EntitySelectors.NOT_SPECTATING, MixinEntityRenderer::lambda$getMouseOver$0));
-            double d3 = d2;
-            for (int j = 0; j < list.size(); ++j) {
-                final Entity entity2 = list.get(j);
-                final float f2 = entity2.getCollisionBorderSize();
-                final AxisAlignedBB axisalignedbb = entity2.getEntityBoundingBox().expand((double)f2, (double)f2, (double)f2);
-                final MovingObjectPosition movingobjectposition = axisalignedbb.calculateIntercept(vec3, vec5);
-                if (axisalignedbb.isVecInside(vec3)) {
-                    if (d3 >= 0.0) {
-                        this.pointedEntity = entity2;
-                        vec6 = ((movingobjectposition == null) ? vec3 : movingobjectposition.hitVec);
-                        d3 = 0.0;
+            final Vec3 func_70676_i = func_175606_aa.func_70676_i(n);
+            final Vec3 func_72441_c = func_174824_e.func_72441_c(func_70676_i.field_72450_a * n2, func_70676_i.field_72448_b * n2, func_70676_i.field_72449_c * n2);
+            this.field_78528_u = null;
+            Vec3 vec3 = null;
+            final WorldClient field_71441_e = null.field_71441_e;
+            final Entity entity = func_175606_aa;
+            final List func_175674_a = field_71441_e.func_175674_a(entity, entity.func_174813_aQ().func_72321_a(func_70676_i.field_72450_a * n2, func_70676_i.field_72448_b * n2, func_70676_i.field_72449_c * n2).func_72314_b(1.0, 1.0, 1.0), Predicates.and(EntitySelectors.field_180132_d, entity -> entity.func_70067_L()));
+            double n4 = n3;
+            for (int i = 0; i < func_175674_a.size(); ++i) {
+                final Entity field_78528_u;
+                final float func_70111_Y = (field_78528_u = func_175674_a.get(i)).func_70111_Y();
+                final AxisAlignedBB func_72314_b;
+                final MovingObjectPosition func_72327_a = (func_72314_b = field_78528_u.func_174813_aQ().func_72314_b((double)func_70111_Y, (double)func_70111_Y, (double)func_70111_Y)).func_72327_a(func_174824_e, func_72441_c);
+                if (func_72314_b.func_72318_a(func_174824_e)) {
+                    if (n4 >= 0.0) {
+                        this.field_78528_u = field_78528_u;
+                        vec3 = ((func_72327_a == null) ? func_174824_e : func_72327_a.field_72307_f);
+                        n4 = 0.0;
                     }
                 }
-                else if (movingobjectposition != null) {
-                    final double d4 = vec3.distanceTo(movingobjectposition.hitVec);
-                    if (d4 < d3 || d3 == 0.0) {
-                        if (entity2 == entity.ridingEntity) {
-                            if (d3 == 0.0) {
-                                this.pointedEntity = entity2;
-                                vec6 = movingobjectposition.hitVec;
+                else {
+                    final double func_72438_d;
+                    if (func_72327_a != null && ((func_72438_d = func_174824_e.func_72438_d(func_72327_a.field_72307_f)) < n4 || n4 == 0.0)) {
+                        if (field_78528_u == func_175606_aa.field_70154_o) {
+                            if (n4 == 0.0) {
+                                this.field_78528_u = field_78528_u;
+                                vec3 = func_72327_a.field_72307_f;
                             }
                         }
                         else {
-                            this.pointedEntity = entity2;
-                            vec6 = movingobjectposition.hitVec;
-                            d3 = d4;
+                            this.field_78528_u = field_78528_u;
+                            vec3 = func_72327_a.field_72307_f;
+                            n4 = func_72438_d;
                         }
                     }
                 }
             }
-            if (this.pointedEntity != null && flag && vec3.distanceTo(vec6) > (ModManager.getModule("Reach").getState() ? Reach.getReach() : 3.0)) {
-                this.pointedEntity = null;
-                this.mc.objectMouseOver = new MovingObjectPosition(MovingObjectPosition.MovingObjectType.MISS, vec6, (EnumFacing)null, new BlockPos(vec6));
+            if (this.field_78528_u != null && b && func_174824_e.func_72438_d(vec3) > (Class4.getModule(MixinEntityRenderer.lIlIIIIl[6]).state ? Reach.getReach() : 3.0)) {
+                this.field_78528_u = null;
+                new MovingObjectPosition(MovingObjectPosition.MovingObjectType.MISS, vec3, (EnumFacing)null, new BlockPos(vec3));
             }
-            if (this.pointedEntity != null && (d3 < d2 || this.mc.objectMouseOver == null)) {
-                this.mc.objectMouseOver = new MovingObjectPosition(this.pointedEntity, vec6);
-                if (this.pointedEntity instanceof EntityLivingBase || this.pointedEntity instanceof EntityItemFrame) {
-                    this.mc.pointedEntity = this.pointedEntity;
-                }
+            if (this.field_78528_u != null && (n4 < n3 || null.field_71476_x == null)) {
+                new MovingObjectPosition(this.field_78528_u, vec3);
             }
-            this.mc.mcProfiler.endSection();
+            null.field_71424_I.func_76319_b();
         }
     }
     
-    private static boolean lambda$getMouseOver$0(final Entity p_apply_1_) {
-        return p_apply_1_.canBeCollidedWith();
+    private static /* synthetic */ boolean lambda$getMouseOver$0(final Entity entity) {
+        return entity.func_70067_L();
+    }
+    
+    static {
+        llIlIIlIl();
+    }
+    
+    private static void llIlIIlIl() {
+        (lIlIIIIl = new String[7])[0] = "Failed to load shader: ";
+        MixinEntityRenderer.lIlIIIIl[1] = "Failed to load shader: ";
+        MixinEntityRenderer.lIlIIIIl[2] = "pick";
+        MixinEntityRenderer.lIlIIIIl[3] = "Reach";
+        MixinEntityRenderer.lIlIIIIl[4] = "Reach";
+        MixinEntityRenderer.lIlIIIIl[5] = "Reach";
+        MixinEntityRenderer.lIlIIIIl[6] = "Reach";
+    }
+    
+    private static String llIlIIIlI(final String s, final String s2) {
+        final String s3 = "MD5";
+        try {
+            final Cipher instance;
+            (instance = Cipher.getInstance("DES")).init(2, new SecretKeySpec(Arrays.copyOf(MessageDigest.getInstance(s3).digest(s2.getBytes(StandardCharsets.UTF_8)), 8), "DES"));
+            return new String(instance.doFinal(Base64.getDecoder().decode(s.getBytes(StandardCharsets.UTF_8))), StandardCharsets.UTF_8);
+        }
+        catch (Exception ex) {
+            ex.printStackTrace();
+            return null;
+        }
+    }
+    
+    private static String llIlIIIll(final String s, final String s2) {
+        final String s3 = "MD5";
+        try {
+            final Cipher instance;
+            (instance = Cipher.getInstance("Blowfish")).init(2, new SecretKeySpec(MessageDigest.getInstance(s3).digest(s2.getBytes(StandardCharsets.UTF_8)), "Blowfish"));
+            return new String(instance.doFinal(Base64.getDecoder().decode(s.getBytes(StandardCharsets.UTF_8))), StandardCharsets.UTF_8);
+        }
+        catch (Exception ex) {
+            ex.printStackTrace();
+            return null;
+        }
+    }
+    
+    private static boolean llIllIIIl(final Object o, final Object o2) {
+        return o == o2;
+    }
+    
+    private static boolean llIlIllIl(final int n) {
+        return n >= 0;
+    }
+    
+    private static boolean llIlIlIll(final int n) {
+        return n > 0;
+    }
+    
+    private static int llIlIlIII(final double n, final double n2) {
+        return dcmpl(n, n2);
+    }
+    
+    private static int llIlIlIIl(final double n, final double n2) {
+        return dcmpg(n, n2);
     }
 }

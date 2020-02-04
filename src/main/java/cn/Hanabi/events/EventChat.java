@@ -2,20 +2,21 @@ package cn.Hanabi.events;
 
 import com.darkmagician6.eventapi.events.*;
 
-public class EventChat implements Event
+public final class EventChat implements Event
 {
     public String message;
     public boolean cancelled;
     
-    public EventChat(final String chat) {
-        this.message = chat;
+    public EventChat(final String message) {
+        super();
+        this.message = message;
     }
     
-    public String getMessage() {
+    private String getMessage() {
         return this.message;
     }
     
-    public void setCancelled(final boolean b) {
-        this.cancelled = b;
+    private void setCancelled$1385ff() {
+        this.cancelled = true;
     }
 }

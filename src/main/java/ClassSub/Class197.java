@@ -1,61 +1,87 @@
 package ClassSub;
 
-public class Class197
+import javax.swing.*;
+import java.awt.*;
+import java.lang.invoke.*;
+import javax.crypto.*;
+import java.nio.charset.*;
+import javax.crypto.spec.*;
+import java.security.*;
+import java.util.*;
+
+abstract class Class197 implements Class52
 {
-    public static final int IMMEDIATE_RENDERER = 1;
-    public static final int VERTEX_ARRAY_RENDERER = 2;
-    public static final int DEFAULT_LINE_STRIP_RENDERER = 3;
-    public static final int QUAD_BASED_LINE_STRIP_RENDERER = 4;
-    private static Class311 renderer;
-    private static Class127 lineStripRenderer;
-    public static final boolean Cracked_By_Somebody_Dumped_BY_Ganga_SupportedbySucen;
+    String value;
+    private String name;
+    private static final long a;
+    private static final String[] lIlllIIIIII;
     
-    public static void setRenderer(final int n) {
-        switch (n) {
-            case 1: {
-                setRenderer(new Class54());
+    public Class197(final String name, final String value) {
+        super();
+        this.value = value;
+        this.name = name;
+    }
+    
+    @Override
+    public final void setString(final String value) {
+        this.value = value;
+    }
+    
+    @Override
+    public final String getString() {
+        return this.value;
+    }
+    
+    @Override
+    public final String getName() {
+        return this.name;
+    }
+    
+    @Override
+    public String toString() {
+        final int[] b = Class139.b();
+        final String value = this.value;
+        if (b == null) {
+            if (value == null) {
+                return Class197.lIlllIIIIII[0];
             }
-            case 2: {
-                setRenderer(new Class149());
-            }
-            default: {
-                throw new RuntimeException("Unknown renderer type: " + n);
-            }
+            this.value.toString();
         }
+        return value;
     }
     
-    public static void setLineStripRenderer(final int n) {
-        switch (n) {
-            case 3: {
-                setLineStripRenderer(new Class16());
-            }
-            case 4: {
-                setLineStripRenderer(new Class169());
-            }
-            default: {
-                throw new RuntimeException("Unknown line strip renderer type: " + n);
-            }
-        }
-    }
-    
-    public static void setLineStripRenderer(final Class127 lineStripRenderer) {
-        Class197.lineStripRenderer = lineStripRenderer;
-    }
-    
-    public static void setRenderer(final Class311 renderer) {
-        Class197.renderer = renderer;
-    }
-    
-    public static Class311 get() {
-        return Class197.renderer;
-    }
-    
-    public static Class127 getLineStripRenderer() {
-        return Class197.lineStripRenderer;
+    public final boolean showValueDialog(final JComponent component, final String s) {
+        final Class227 class227;
+        (class227 = new Class227(component, this.name, s)).setTitle(this.name);
+        class227.setLocationRelativeTo(null);
+        EventQueue.invokeLater(new Class173(component));
+        class227.setVisible(true);
+        return class227.okPressed;
     }
     
     static {
-        Class197.renderer = new Class54();
-        Class197.lineStripRenderer = new Class16();
+        llllllIlllll();
+        Class169.a(8381932649263021775L, 1987422613712876603L, MethodHandles.lookup().lookupClass()).a(84412799696818L);
+    }
+    
+    private static RuntimeException b(final RuntimeException ex) {
+        return ex;
+    }
+    
+    private static void llllllIlllll() {
+        (lIlllIIIIII = new String[] { null })[0] = "";
+    }
+    
+    private static String llllllIllllI(final String s, final String s2) {
+        final String s3 = "MD5";
+        try {
+            final Cipher instance;
+            (instance = Cipher.getInstance("DES")).init(2, new SecretKeySpec(Arrays.copyOf(MessageDigest.getInstance(s3).digest(s2.getBytes(StandardCharsets.UTF_8)), 8), "DES"));
+            return new String(instance.doFinal(Base64.getDecoder().decode(s.getBytes(StandardCharsets.UTF_8))), StandardCharsets.UTF_8);
+        }
+        catch (Exception ex) {
+            ex.printStackTrace();
+            return null;
+        }
     }
 }

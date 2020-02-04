@@ -5,7 +5,7 @@ import net.minecraft.client.renderer.entity.*;
 import net.minecraft.client.model.*;
 import org.apache.logging.log4j.*;
 import org.spongepowered.asm.mixin.injection.callback.*;
-import cn.Hanabi.modules.*;
+import ClassSub.*;
 import net.minecraft.entity.player.*;
 import org.spongepowered.asm.mixin.injection.*;
 import net.minecraft.util.*;
@@ -15,161 +15,202 @@ import com.darkmagician6.eventapi.events.*;
 import net.minecraft.entity.*;
 import net.minecraft.client.renderer.*;
 import org.spongepowered.asm.mixin.*;
+import javax.crypto.*;
+import java.nio.charset.*;
+import javax.crypto.spec.*;
+import java.security.*;
+import java.util.*;
 
 @Mixin({ RendererLivingEntity.class })
 public abstract class MixinRendererLivingEntity<T extends EntityLivingBase> extends MixinRender implements IRendererLivingEntity
 {
     @Shadow
-    protected boolean renderOutlines;
+    private boolean field_177098_i;
     @Shadow
-    protected ModelBase mainModel;
+    private ModelBase field_77045_g;
     @Shadow
     @Final
-    private static Logger logger;
+    private static Logger field_147923_a;
+    private static final String[] llIIIIlIII;
     
     public MixinRendererLivingEntity() {
-        this.renderOutlines = false;
+        super();
     }
     
     @Inject(method = { "renderName(Lnet/minecraft/entity/EntityLivingBase;DDD)V" }, at = { @At("HEAD") }, cancellable = true)
-    public void onChat(final EntityLivingBase entity, final double x, final double y, final double z, final CallbackInfo ci) {
-        if (ModManager.getModule("Nametags").isEnabled() && entity instanceof EntityPlayer) {
-            ci.cancel();
+    private static void onChat$11864d99(final EntityLivingBase entityLivingBase, final CallbackInfo callbackInfo) {
+        if (Class4.getModule(MixinRendererLivingEntity.llIIIIlIII[0]).state && entityLivingBase instanceof EntityPlayer) {
+            callbackInfo.cancel();
         }
     }
     
     @Shadow
-    protected abstract float interpolateRotation(final float p0, final float p1, final float p2);
+    protected abstract float func_77034_a$483d241b();
     
     @Shadow
-    protected abstract float getSwingProgress(final T p0, final float p1);
+    protected abstract float func_77040_d$1bae0699();
     
     @Shadow
-    protected abstract void renderLivingAt(final T p0, final double p1, final double p2, final double p3);
+    protected abstract void func_77039_a$17c926d9();
     
     @Shadow
-    protected abstract void rotateCorpse(final T p0, final float p1, final float p2, final float p3);
+    protected abstract void func_77043_a$17ac0797();
     
     @Shadow
-    protected abstract float handleRotationFloat(final T p0, final float p1);
+    protected abstract float func_77044_a$1bae0699();
     
     @Shadow
-    protected abstract void preRenderCallback(final T p0, final float p1);
+    protected abstract void func_77041_b$1bae06a9();
     
     @Shadow
-    protected abstract boolean setScoreTeamColor(final EntityLivingBase p0);
+    protected abstract boolean func_177088_c$17e1a005();
     
     @Shadow
-    protected abstract void unsetScoreTeamColor();
+    protected abstract void func_180565_e();
     
     @Shadow
-    protected abstract void renderModel(final T p0, final float p1, final float p2, final float p3, final float p4, final float p5, final float p6);
+    protected abstract void func_77036_a$454b32b7();
     
     @Shadow
-    protected abstract void renderLayers(final T p0, final float p1, final float p2, final float p3, final float p4, final float p5, final float p6, final float p7);
+    protected abstract void func_177093_a$641b8be9();
     
     @Shadow
-    protected abstract boolean setDoRenderBrightness(final T p0, final float p1);
+    protected abstract boolean func_177090_c$1bae06ad();
     
     @Shadow
-    protected abstract void unsetBrightness();
+    protected abstract void func_177091_f();
     
     @Override
-    public void doRenderModel(final Object entitylivingbaseIn, final float a, final float b, final float c, final float d, final float e, final float scaleFactor) {
-        this.renderModel((EntityLivingBase)entitylivingbaseIn, a, b, c, d, e, scaleFactor);
+    public final void doRenderModel$790b0af() {
     }
     
     @Override
-    public void doRenderLayers(final Object entitylivingbaseIn, final float a, final float b, final float partialTicks, final float d, final float e, final float f, final float g) {
-        this.renderLayers((EntityLivingBase)entitylivingbaseIn, a, b, partialTicks, d, e, f, g);
+    public final void doRenderLayers$157b028f() {
     }
     
     @Overwrite
-    public void doRender(final T entity, final double x, final double y, final double z, final float entityYaw, final float partialTicks) {
-        GlStateManager.pushMatrix();
-        GlStateManager.disableCull();
-        this.mainModel.swingProgress = this.getSwingProgress(entity, partialTicks);
-        this.mainModel.isRiding = entity.isRiding();
-        this.mainModel.isChild = entity.isChild();
+    private void func_76986_a$4a0ddc99(final T t, final float n) {
+        GlStateManager.func_179094_E();
+        GlStateManager.func_179129_p();
+        t.func_70115_ae();
+        t.func_70631_g_();
         try {
-            float f = this.interpolateRotation(entity.prevRenderYawOffset, entity.renderYawOffset, partialTicks);
-            final float f2 = this.interpolateRotation(entity.prevRotationYawHead, entity.rotationYawHead, partialTicks);
-            float f3 = f2 - f;
-            if (this.mainModel.isRiding && entity.ridingEntity instanceof EntityLivingBase) {
-                final EntityLivingBase entitylivingbase = (EntityLivingBase)entity.ridingEntity;
-                f = this.interpolateRotation(entitylivingbase.prevRenderYawOffset, entitylivingbase.renderYawOffset, partialTicks);
-                f3 = f2 - f;
-                float f4 = MathHelper.wrapAngleTo180_float(f3);
-                if (f4 < -85.0f) {
-                    f4 = -85.0f;
+            final float field_70760_ar = t.field_70760_ar;
+            final float field_70761_aq = t.field_70761_aq;
+            float func_77034_a$483d241b = this.func_77034_a$483d241b();
+            final float field_70758_at = t.field_70758_at;
+            final float field_70759_as = t.field_70759_as;
+            final float func_77034_a$483d241b2;
+            float n2 = (func_77034_a$483d241b2 = this.func_77034_a$483d241b()) - func_77034_a$483d241b;
+            if (null.field_78093_q && t.field_70154_o instanceof EntityLivingBase) {
+                final EntityLivingBase entityLivingBase = (EntityLivingBase)t.field_70154_o;
+                final float field_70760_ar2 = entityLivingBase.field_70760_ar;
+                final float field_70761_aq2 = entityLivingBase.field_70761_aq;
+                float func_76142_g;
+                if ((func_76142_g = MathHelper.func_76142_g(n2 = func_77034_a$483d241b2 - this.func_77034_a$483d241b())) < -85.0f) {
+                    func_76142_g = -85.0f;
                 }
-                if (f4 >= 85.0f) {
-                    f4 = 85.0f;
+                if (func_76142_g >= 85.0f) {
+                    func_76142_g = 85.0f;
                 }
-                f = f2 - f4;
-                if (f4 * f4 > 2500.0f) {
-                    f += f4 * 0.2f;
+                func_77034_a$483d241b = func_77034_a$483d241b2 - func_76142_g;
+                final float n3 = func_76142_g;
+                if (n3 * n3 > 2500.0f) {
+                    func_77034_a$483d241b += func_76142_g * 0.2f;
                 }
             }
-            final float f5 = entity.prevRotationPitch + (entity.rotationPitch - entity.prevRotationPitch) * partialTicks;
-            this.renderLivingAt(entity, x, y, z);
-            final float f6 = this.handleRotationFloat(entity, partialTicks);
-            this.rotateCorpse(entity, f6, f, partialTicks);
-            GlStateManager.enableRescaleNormal();
-            GlStateManager.scale(-1.0f, -1.0f, 1.0f);
-            this.preRenderCallback(entity, partialTicks);
-            final float f7 = 0.0625f;
-            GlStateManager.translate(0.0f, -1.5078125f, 0.0f);
-            float f8 = entity.prevLimbSwingAmount + (entity.limbSwingAmount - entity.prevLimbSwingAmount) * partialTicks;
-            float f9 = entity.limbSwing - entity.limbSwingAmount * (1.0f - partialTicks);
-            if (entity instanceof EntityPlayer) {
-                final EventRenderLivingEntity pre = new EventRenderLivingEntity(entity, true, f9, f8, f6, f3, f5, f, f7);
-                EventManager.call(pre);
-                if (pre.isCancelled()) {
+            final float n4 = t.field_70127_C + (t.field_70125_A - t.field_70127_C) * n;
+            final float func_77044_a$1bae0699 = this.func_77044_a$1bae0699();
+            GlStateManager.func_179091_B();
+            GlStateManager.func_179152_a(-1.0f, -1.0f, 1.0f);
+            GlStateManager.func_179109_b(0.0f, -1.5078125f, 0.0f);
+            float n5 = t.field_70722_aY + (t.field_70721_aZ - t.field_70722_aY) * n;
+            float n6 = t.field_70754_ba - t.field_70721_aZ * (1.0f - n);
+            if (t instanceof EntityPlayer) {
+                final EventRenderLivingEntity eventRenderLivingEntity;
+                EventManager.call(eventRenderLivingEntity = new EventRenderLivingEntity(t, n6, n5, func_77044_a$1bae0699, n2, n4, func_77034_a$483d241b));
+                if (eventRenderLivingEntity.cancelled) {
                     return;
                 }
             }
-            if (entity.isChild()) {
-                f9 *= 3.0f;
+            if (t.func_70631_g_()) {
+                n6 *= 3.0f;
             }
-            if (f8 > 1.0f) {
-                f8 = 1.0f;
+            if (n5 > 1.0f) {
+                n5 = 1.0f;
             }
-            GlStateManager.enableAlpha();
-            this.mainModel.setLivingAnimations((EntityLivingBase)entity, f9, f8, partialTicks);
-            this.mainModel.setRotationAngles(f9, f8, f6, f3, f5, 0.0625f, (Entity)entity);
-            if (this.renderOutlines) {
-                final boolean flag1 = this.setScoreTeamColor(entity);
-                this.renderModel(entity, f9, f8, f6, f3, f5, 0.0625f);
-                if (flag1) {
-                    this.unsetScoreTeamColor();
-                }
+            GlStateManager.func_179141_d();
+            null.func_78086_a((EntityLivingBase)t, n6, n5, n);
+            null.func_78087_a(n6, n5, func_77044_a$1bae0699, n2, n4, 0.0625f, (Entity)t);
+            GlStateManager.func_179132_a(true);
+            if (t instanceof EntityPlayer) {
+                ((EntityPlayer)t).func_175149_v();
             }
-            else {
-                final boolean flag2 = this.setDoRenderBrightness(entity, partialTicks);
-                this.renderModel(entity, f9, f8, f6, f3, f5, 0.0625f);
-                if (flag2) {
-                    this.unsetBrightness();
-                }
-                GlStateManager.depthMask(true);
-                if (!(entity instanceof EntityPlayer) || !((EntityPlayer)entity).isSpectator()) {
-                    this.renderLayers(entity, f9, f8, partialTicks, f6, f3, f5, 0.0625f);
-                }
-            }
-            GlStateManager.disableRescaleNormal();
+            GlStateManager.func_179101_C();
         }
-        catch (Exception exception) {
-            MixinRendererLivingEntity.logger.error("Couldn't render entity", (Throwable)exception);
+        catch (Exception ex) {
+            null.error(MixinRendererLivingEntity.llIIIIlIII[1], (Throwable)ex);
         }
-        GlStateManager.setActiveTexture(OpenGlHelper.lightmapTexUnit);
-        GlStateManager.enableTexture2D();
-        GlStateManager.setActiveTexture(OpenGlHelper.defaultTexUnit);
-        GlStateManager.enableCull();
-        GlStateManager.popMatrix();
-        if (!this.renderOutlines) {
-            super.doRender(entity, x, y, z, entityYaw, partialTicks);
+        GlStateManager.func_179138_g(OpenGlHelper.field_77476_b);
+        GlStateManager.func_179098_w();
+        GlStateManager.func_179138_g(OpenGlHelper.field_77478_a);
+        GlStateManager.func_179089_o();
+        GlStateManager.func_179121_F();
+        EventManager.call(new EventRenderLivingEntity(t));
+    }
+    
+    static {
+        lIIIllIlIIII();
+    }
+    
+    private static void lIIIllIlIIII() {
+        (llIIIIlIII = new String[2])[0] = "Nametags";
+        MixinRendererLivingEntity.llIIIIlIII[1] = "Couldn't render entity";
+    }
+    
+    private static String lIIIllIIllIl(final String s, final String s2) {
+        final String s3 = "MD5";
+        try {
+            final Cipher instance;
+            (instance = Cipher.getInstance("DES")).init(2, new SecretKeySpec(Arrays.copyOf(MessageDigest.getInstance(s3).digest(s2.getBytes(StandardCharsets.UTF_8)), 8), "DES"));
+            return new String(instance.doFinal(Base64.getDecoder().decode(s.getBytes(StandardCharsets.UTF_8))), StandardCharsets.UTF_8);
         }
-        final EventRenderLivingEntity post = new EventRenderLivingEntity(entity, false);
-        EventManager.call(post);
+        catch (Exception ex) {
+            ex.printStackTrace();
+            return null;
+        }
+    }
+    
+    private static String lIIIllIIlIll(final String s, final String s2) {
+        final String s3 = "MD5";
+        try {
+            final Cipher instance;
+            (instance = Cipher.getInstance("Blowfish")).init(2, new SecretKeySpec(MessageDigest.getInstance(s3).digest(s2.getBytes(StandardCharsets.UTF_8)), "Blowfish"));
+            return new String(instance.doFinal(Base64.getDecoder().decode(s.getBytes(StandardCharsets.UTF_8))), StandardCharsets.UTF_8);
+        }
+        catch (Exception ex) {
+            ex.printStackTrace();
+            return null;
+        }
+    }
+    
+    private static boolean lIIIllIlllIl(final int n) {
+        return n >= 0;
+    }
+    
+    private static boolean lIIIllIlllII(final int n) {
+        return n < 0;
+    }
+    
+    private static boolean lIIIllIllllI(final int n) {
+        return n > 0;
+    }
+    
+    private static int lIIIllIllIll(final float n, final float n2) {
+        return fcmpl(n, n2);
+    }
+    
+    private static int lIIIllIllIlI$2548a28(final float n) {
+        return fcmpg(n, -85.0f);
     }
 }

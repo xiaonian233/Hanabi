@@ -1,6 +1,12 @@
 package cn.Hanabi.utils.fontmanager;
 
-public class HanabiFonts
+import javax.crypto.*;
+import java.nio.charset.*;
+import javax.crypto.spec.*;
+import java.security.*;
+import java.util.*;
+
+public final class HanabiFonts
 {
     public static String ICON_CLICKGUI_RENDER;
     public static String ICON_CLICKGUI_COMBAT;
@@ -20,33 +26,99 @@ public class HanabiFonts
     public static String ICON_NOTIFY_SUCCESS;
     public static String ICON_NOTIFY_WARN;
     public static String ICON_NOTIFY_ERROR;
-    public static String ICON_PLAYER_REPEAT;
-    public static String ICON_PLAYER_NEXT;
-    public static String ICON_PLAYER_PLAY;
-    public static String ICON_PLAYER_PAUSE;
+    private static String ICON_PLAYER_REPEAT;
+    private static String ICON_PLAYER_NEXT;
+    private static String ICON_PLAYER_PLAY;
+    private static String ICON_PLAYER_PAUSE;
+    private static final String[] llIIlllIlll;
+    
+    public HanabiFonts() {
+        super();
+    }
     
     static {
-        HanabiFonts.ICON_CLICKGUI_RENDER = "Ó§?";
-        HanabiFonts.ICON_CLICKGUI_COMBAT = "Ó§?";
-        HanabiFonts.ICON_CLICKGUI_WORLD = "Ó§?";
-        HanabiFonts.ICON_CLICKGUI_MOVEMENT = "Ó§?";
-        HanabiFonts.ICON_CLICKGUI_PLAYER = "Ó§?";
-        HanabiFonts.ICON_CLICKGUI_GHOST = "Ó§?";
-        HanabiFonts.ICON_CLICKGUI_ARROW_UP = "Ó§?";
-        HanabiFonts.ICON_CLICKGUI_ARROW_DOWN = "Ó§?";
-        HanabiFonts.ICON_HANABI_LOGO = "Ó§?";
-        HanabiFonts.ICON_MAINMENU_SINGLE = "Ó§?";
-        HanabiFonts.ICON_MAINMENU_MULTI = "Ó§?";
-        HanabiFonts.ICON_MAINMENU_ALTMANAGER = "Ó§?";
-        HanabiFonts.ICON_MAINMENU_SETTINGS = "Ó§?";
-        HanabiFonts.ICON_MAINMENU_QUITGAME = "Ó§?";
-        HanabiFonts.ICON_NOTIFY_INFO = "Ó§?";
-        HanabiFonts.ICON_NOTIFY_SUCCESS = "Ó§?";
-        HanabiFonts.ICON_NOTIFY_WARN = "Ó§?";
-        HanabiFonts.ICON_NOTIFY_ERROR = "Ó§?";
-        HanabiFonts.ICON_PLAYER_REPEAT = "Ó§?";
-        HanabiFonts.ICON_PLAYER_NEXT = "Ó§?";
-        HanabiFonts.ICON_PLAYER_PLAY = "Ó§?";
-        HanabiFonts.ICON_PLAYER_PAUSE = "Ó§?";
+        lIIlIIIIIIlII();
+        HanabiFonts.ICON_CLICKGUI_RENDER = HanabiFonts.llIIlllIlll[0];
+        HanabiFonts.ICON_CLICKGUI_COMBAT = HanabiFonts.llIIlllIlll[1];
+        HanabiFonts.ICON_CLICKGUI_WORLD = HanabiFonts.llIIlllIlll[2];
+        HanabiFonts.ICON_CLICKGUI_MOVEMENT = HanabiFonts.llIIlllIlll[3];
+        HanabiFonts.ICON_CLICKGUI_PLAYER = HanabiFonts.llIIlllIlll[4];
+        HanabiFonts.ICON_CLICKGUI_GHOST = HanabiFonts.llIIlllIlll[5];
+        HanabiFonts.ICON_CLICKGUI_ARROW_UP = HanabiFonts.llIIlllIlll[6];
+        HanabiFonts.ICON_CLICKGUI_ARROW_DOWN = HanabiFonts.llIIlllIlll[7];
+        HanabiFonts.ICON_HANABI_LOGO = HanabiFonts.llIIlllIlll[8];
+        HanabiFonts.ICON_MAINMENU_SINGLE = HanabiFonts.llIIlllIlll[9];
+        HanabiFonts.ICON_MAINMENU_MULTI = HanabiFonts.llIIlllIlll[10];
+        HanabiFonts.ICON_MAINMENU_ALTMANAGER = HanabiFonts.llIIlllIlll[11];
+        HanabiFonts.ICON_MAINMENU_SETTINGS = HanabiFonts.llIIlllIlll[12];
+        HanabiFonts.ICON_MAINMENU_QUITGAME = HanabiFonts.llIIlllIlll[13];
+        HanabiFonts.ICON_NOTIFY_INFO = HanabiFonts.llIIlllIlll[14];
+        HanabiFonts.ICON_NOTIFY_SUCCESS = HanabiFonts.llIIlllIlll[15];
+        HanabiFonts.ICON_NOTIFY_WARN = HanabiFonts.llIIlllIlll[16];
+        HanabiFonts.ICON_NOTIFY_ERROR = HanabiFonts.llIIlllIlll[17];
+    }
+    
+    private static void lIIlIIIIIIlII() {
+        (llIIlllIlll = new String[22])[0] = "Ó§Ä";
+        HanabiFonts.llIIlllIlll[1] = "Ó§Å";
+        HanabiFonts.llIIlllIlll[2] = "Ó§É";
+        HanabiFonts.llIIlllIlll[3] = "Ó§Ö";
+        HanabiFonts.llIIlllIlll[4] = "Ó§Ü";
+        HanabiFonts.llIIlllIlll[5] = "Ó§á";
+        HanabiFonts.llIIlllIlll[6] = "Ó§ô";
+        HanabiFonts.llIIlllIlll[7] = "Ó§ò";
+        HanabiFonts.llIIlllIlll[8] = "Ó§Ñ";
+        HanabiFonts.llIIlllIlll[9] = "Ó§ä";
+        HanabiFonts.llIIlllIlll[10] = "Ó§å";
+        HanabiFonts.llIIlllIlll[11] = "Ó§í";
+        HanabiFonts.llIIlllIlll[12] = "Ó§ç";
+        HanabiFonts.llIIlllIlll[13] = "Ó§ê";
+        HanabiFonts.llIIlllIlll[14] = "Ó§ã";
+        HanabiFonts.llIIlllIlll[15] = "Ó§ñ";
+        HanabiFonts.llIIlllIlll[16] = "Ó§ó";
+        HanabiFonts.llIIlllIlll[17] = "Ó§â";
+        HanabiFonts.llIIlllIlll[18] = "Ó§è";
+        HanabiFonts.llIIlllIlll[19] = "Ó§ë";
+        HanabiFonts.llIIlllIlll[20] = "Ó§à";
+        HanabiFonts.llIIlllIlll[21] = "Ó§ï";
+    }
+    
+    private static String lIIIlllllIlII(final String s, final String s2) {
+        final String s3 = "MD5";
+        try {
+            final Cipher instance;
+            (instance = Cipher.getInstance("Blowfish")).init(2, new SecretKeySpec(MessageDigest.getInstance(s3).digest(s2.getBytes(StandardCharsets.UTF_8)), "Blowfish"));
+            return new String(instance.doFinal(Base64.getDecoder().decode(s.getBytes(StandardCharsets.UTF_8))), StandardCharsets.UTF_8);
+        }
+        catch (Exception ex) {
+            ex.printStackTrace();
+            return null;
+        }
+    }
+    
+    private static String lIIIlllllIlll(String s, final String s2) {
+        s = new String(Base64.getDecoder().decode(s.getBytes(StandardCharsets.UTF_8)), StandardCharsets.UTF_8);
+        final StringBuilder sb = new StringBuilder();
+        final char[] charArray = s2.toCharArray();
+        int n = 0;
+        char[] charArray2;
+        for (int length = (charArray2 = s.toCharArray()).length, i = 0; i < length; ++i) {
+            sb.append((char)(charArray2[i] ^ charArray[n % charArray.length]));
+            ++n;
+        }
+        return String.valueOf(sb);
+    }
+    
+    private static String lIIIllllllIII(final String s, final String s2) {
+        final String s3 = "MD5";
+        try {
+            final Cipher instance;
+            (instance = Cipher.getInstance("DES")).init(2, new SecretKeySpec(Arrays.copyOf(MessageDigest.getInstance(s3).digest(s2.getBytes(StandardCharsets.UTF_8)), 8), "DES"));
+            return new String(instance.doFinal(Base64.getDecoder().decode(s.getBytes(StandardCharsets.UTF_8))), StandardCharsets.UTF_8);
+        }
+        catch (Exception ex) {
+            ex.printStackTrace();
+            return null;
+        }
     }
 }

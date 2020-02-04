@@ -1,25 +1,31 @@
 package ClassSub;
 
-public class Class226 extends RuntimeException
+import cn.Hanabi.events.*;
+import cn.Hanabi.modules.Combat.*;
+import net.minecraft.entity.player.*;
+
+public final class Class226 extends Thread
 {
-    public static final boolean Cracked_By_Somebody_Dumped_BY_Ganga_SupportedbySucen;
+    private EventAttack val$e;
+    private TPHit this$0;
     
-    public Class226() {
+    private Class226(final TPHit this$0, final EventAttack val$e) {
+        this.this$0 = this$0;
+        this.val$e = val$e;
+        super();
     }
     
-    public Class226(final String s) {
-        super(s);
-    }
-    
-    public Class226(final String s, final Throwable t) {
-        super(s, t);
-    }
-    
-    public Class226(final Throwable t) {
-        super(t);
-    }
-    
-    public Class226(final String s, final Throwable t, final boolean b, final boolean b2) {
-        super(s, t, b, b2);
+    @Override
+    public final void run() {
+        final long n = 175L;
+        try {
+            Thread.sleep(n);
+        }
+        catch (InterruptedException ex) {
+            ex.printStackTrace();
+        }
+        this.this$0.aacState = 2;
+        TPHit.access$3500().field_71442_b.func_78764_a((EntityPlayer)TPHit.access$3400().field_71439_g, this.val$e.entity);
+        TPHit.access$3600().field_71439_g.func_71038_i();
     }
 }

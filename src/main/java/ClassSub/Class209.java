@@ -1,51 +1,40 @@
 package ClassSub;
 
-class Class209
+public final class Class209 extends Class129
 {
-    private float yaw;
-    private float pitch;
-    public static final boolean Cracked_By_Somebody_Dumped_BY_Ganga_SupportedbySucen;
-    
-    public Class209(final float yaw, final float pitch) {
-        this.yaw = yaw;
-        this.pitch = pitch;
+    private Class209(final float x, final float y) {
+        super();
+        this.x = x;
+        this.y = y;
+        this.checkPoints();
     }
     
-    public Class209() {
-        this(0.0f, 0.0f);
+    @Override
+    public final Class129 transform(final Class24 class24) {
+        class24.transform$3b3ff12(this.points, new float[this.points.length], this.points.length / 2);
+        return new Class209(this.points[0], this.points[1]);
     }
     
-    public float getYaw() {
-        return this.yaw;
+    @Override
+    protected final void createPoints() {
+        (this.points = new float[2])[0] = this.getX();
+        this.points[1] = this.getY();
+        this.maxX = this.x;
+        this.maxY = this.y;
+        this.minX = this.x;
+        this.minY = this.y;
+        this.findCenter();
+        this.boundingCircleRadius = 0.0f;
     }
     
-    public float getPitch() {
-        return this.pitch;
+    @Override
+    protected final void findCenter() {
+        (this.center = new float[2])[0] = this.points[0];
+        this.center[1] = this.points[1];
     }
     
-    public void setYaw(final float yaw) {
-        this.yaw = yaw;
-    }
-    
-    public void setPitch(final float pitch) {
-        this.pitch = pitch;
-    }
-    
-    public Class209 constrantAngle() {
-        this.setYaw(this.getYaw() % 360.0f);
-        this.setPitch(this.getPitch() % 360.0f);
-        while (this.getYaw() <= -180.0f) {
-            this.setYaw(this.getYaw() + 360.0f);
-        }
-        while (this.getPitch() <= -180.0f) {
-            this.setPitch(this.getPitch() + 360.0f);
-        }
-        while (this.getYaw() > 180.0f) {
-            this.setYaw(this.getYaw() - 360.0f);
-        }
-        while (this.getPitch() > 180.0f) {
-            this.setPitch(this.getPitch() - 360.0f);
-        }
-        return this;
+    @Override
+    protected final void calculateRadius() {
+        this.boundingCircleRadius = 0.0f;
     }
 }

@@ -1,10 +1,38 @@
 package ClassSub;
 
-public interface Class173
+import javax.swing.*;
+import java.lang.invoke.*;
+
+final class Class173 implements Runnable
 {
-    public static final boolean 对你对话使我感到了一种莫名的耻辱你还要说�?么呢你以为你爹爹我会为此心情有一丝丝浮动是吗你看看你苟延残喘的啊你为�?么一跟我说话就结结巴巴的呢是不是压的你根本无法喘息NMSLNMSLNMSLNMSLNMSLNMSLNMSLNMSLNMSLNMSLNMSLNMSLNMSLNMSLNMSLNMSLNMSLNMSLNMSLNMSLNMSLNMSLNMSLNMSLNMSLNMSLNMSLNMSLNMSLNMSLNMSLNMSLNMSLNMSLNMSLNMSLNMSLNMSLNMSLNMSLNMSLNMSLNMSLNMSL‌�?��?��?��?��??;
+    private JComponent val$component;
+    private Class197 this$0;
+    private static final long a;
     
-    Class26 colorAt(final Class186 p0, final float p1, final float p2);
+    Class173(final JComponent val$component) {
+        this.val$component = val$component;
+        super();
+    }
     
-    Class224 getOffsetAt(final Class186 p0, final float p1, final float p2);
+    @Override
+    public final void run() {
+        final int[] b = Class139.b();
+        JComponent component = this.val$component;
+        final int[] array = b;
+        final boolean b2 = component instanceof JSpinner;
+        if (array == null) {
+            if (b2) {
+                component = ((JSpinner.DefaultEditor)((JSpinner)this.val$component).getEditor()).getTextField();
+            }
+            component.requestFocusInWindow();
+        }
+    }
+    
+    static {
+        Class169.a(410573320312386152L, 1444478221905083353L, MethodHandles.lookup().lookupClass()).a(180612600874134L);
+    }
+    
+    private static RuntimeException a(final RuntimeException ex) {
+        return ex;
+    }
 }

@@ -1,13 +1,12 @@
 package ClassSub;
 
-public class Class178 extends Class249
+public final class Class178<T extends Number> extends Class21<Number>
 {
-    public static final String PACKET_ID = "WHOIS";
-    public final String targetClient;
-    public static final boolean Cracked_By_Somebody_Dumped_BY_Ganga_SupportedbySucen;
+    public Class178(final T t, final T t2) {
+        super(t, t2, 0);
+    }
     
-    public Class178(final String s) {
-        super("WHOIS::" + (s.startsWith("WHOIS::") ? s.split("::")[1] : s), Class298.SEND);
-        this.targetClient = (s.startsWith("WHOIS::") ? s.split("::")[1] : s);
+    private Class58<T> toVector3() {
+        return new Class58<T>((T)this.getX(), (T)this.getY(), (T)this.getZ());
     }
 }

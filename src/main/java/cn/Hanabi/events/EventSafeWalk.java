@@ -2,19 +2,20 @@ package cn.Hanabi.events;
 
 import com.darkmagician6.eventapi.events.callables.*;
 
-public class EventSafeWalk extends EventCancellable
+public final class EventSafeWalk extends EventCancellable
 {
     public boolean safe;
     
-    public EventSafeWalk(final boolean safe) {
-        this.safe = safe;
+    public EventSafeWalk() {
+        super();
+        this.safe = false;
     }
     
-    public void setSafe(final boolean safe) {
-        this.safe = safe;
+    private void setSafe$1385ff() {
+        this.safe = true;
     }
     
-    public boolean getSafe() {
+    private boolean getSafe() {
         return this.safe;
     }
 }

@@ -5,27 +5,31 @@ import net.minecraft.client.renderer.entity.*;
 import org.spongepowered.asm.mixin.*;
 
 @Mixin({ RenderManager.class })
-public class MixinRenderManager implements IRenderManager
+public final class MixinRenderManager implements IRenderManager
 {
     @Shadow
-    private double renderPosX;
+    private double field_78725_b;
     @Shadow
-    private double renderPosY;
+    private double field_78726_c;
     @Shadow
-    private double renderPosZ;
+    private double field_78723_d;
     
-    @Override
-    public double getRenderPosX() {
-        return this.renderPosX;
+    public MixinRenderManager() {
+        super();
     }
     
     @Override
-    public double getRenderPosY() {
-        return this.renderPosY;
+    public final double getRenderPosX() {
+        return 0.0;
     }
     
     @Override
-    public double getRenderPosZ() {
-        return this.renderPosZ;
+    public final double getRenderPosY() {
+        return 0.0;
+    }
+    
+    @Override
+    public final double getRenderPosZ() {
+        return 0.0;
     }
 }

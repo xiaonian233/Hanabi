@@ -1,20 +1,25 @@
 package ClassSub;
 
-public class Class238 extends Class249
+public final class Class238
 {
-    public static final String PACKET_ID = "SERVERCHAT";
-    public final String message;
-    public static final boolean Cracked_By_Somebody_Dumped_BY_Ganga_SupportedbySucen;
+    private int numComponents;
+    private boolean hasAlpha;
     
-    public Class238(final String s, final String message) {
-        super("SERVERCHAT::" + message, Class298.RECIEVE);
-        this.message = message;
-        if (s != null) {
-            Class158.LOGGER.log("[Server -> " + s + "]" + message);
-        }
+    private Class238(final int numComponents, final boolean hasAlpha) {
+        super();
+        this.numComponents = numComponents;
+        this.hasAlpha = hasAlpha;
     }
     
-    public Class238(final String s) {
-        this(null, s.split("::")[1]);
+    private int getNumComponents() {
+        return this.numComponents;
+    }
+    
+    private boolean isHasAlpha() {
+        return this.hasAlpha;
+    }
+    
+    Class238(final int n, final boolean b, final byte b2) {
+        this(n, b);
     }
 }

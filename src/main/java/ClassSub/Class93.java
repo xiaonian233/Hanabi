@@ -1,75 +1,34 @@
 package ClassSub;
 
-import java.util.*;
+import cn.Hanabi.modules.*;
+import java.lang.invoke.*;
 
-private class Class93
+final class Class93 extends Class339
 {
-    private Class148 loc;
-    private Class93 parent;
-    private ArrayList<Class148> path;
-    private double squareDistanceToFromTarget;
-    private double cost;
-    private double totalCost;
-    final Class171 this$0;
-    public static final boolean Cracked_By_Somebody_Dumped_BY_Ganga_SupportedbySucen;
+    private Class68 this$0;
+    private static final long a;
     
-    public Class93(final Class171 this$0, final Class148 loc, final Class93 parent, final ArrayList<Class148> path, final double squareDistanceToFromTarget, final double cost, final double totalCost) {
+    Class93(final Class68 this$0, final String s, final boolean b) {
         this.this$0 = this$0;
-        this.loc = null;
-        this.parent = null;
-        this.loc = loc;
-        this.parent = parent;
-        this.path = path;
-        this.squareDistanceToFromTarget = squareDistanceToFromTarget;
-        this.cost = cost;
-        this.totalCost = totalCost;
+        super(s, b);
     }
     
-    public Class148 getLoc() {
-        return this.loc;
+    @Override
+    public final void onPress() {
+        final int[] b = Class139.b();
+        final Mod mod = this.this$0.mod;
+        final boolean state = this.this$0.mod.state;
+        if (b == null && state) {}
+        mod.setState(state, true);
+        this.this$0.mod.modButton.toggle();
+        super.onPress();
     }
     
-    public Class93 getParent() {
-        return this.parent;
+    static {
+        Class169.a(7994940165959281664L, 5456192134997696637L, MethodHandles.lookup().lookupClass()).a(220838605065535L);
     }
     
-    public ArrayList<Class148> getPath() {
-        return this.path;
-    }
-    
-    public double getSquareDistanceToFromTarget() {
-        return this.squareDistanceToFromTarget;
-    }
-    
-    public double getCost() {
-        return this.cost;
-    }
-    
-    public void setLoc(final Class148 loc) {
-        this.loc = loc;
-    }
-    
-    public void setParent(final Class93 parent) {
-        this.parent = parent;
-    }
-    
-    public void setPath(final ArrayList<Class148> path) {
-        this.path = path;
-    }
-    
-    public void setSquareDistanceToFromTarget(final double squareDistanceToFromTarget) {
-        this.squareDistanceToFromTarget = squareDistanceToFromTarget;
-    }
-    
-    public void setCost(final double cost) {
-        this.cost = cost;
-    }
-    
-    public double getTotalCost() {
-        return this.totalCost;
-    }
-    
-    public void setTotalCost(final double totalCost) {
-        this.totalCost = totalCost;
+    private static RuntimeException a(final RuntimeException ex) {
+        return ex;
     }
 }

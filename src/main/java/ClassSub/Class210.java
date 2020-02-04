@@ -1,27 +1,10 @@
 package ClassSub;
 
-class Class210
+import java.io.*;
+
+public interface Class210
 {
-    static final int[] $SwitchMap$cn$Hanabi$gui$notifications$Notification$Type;
-    public static final boolean Cracked_By_Somebody_Dumped_BY_Ganga_SupportedbySucen;
+    void load() throws IOException;
     
-    static {
-        $SwitchMap$cn$Hanabi$gui$notifications$Notification$Type = new int[Class84.Class307.values().length];
-        try {
-            Class210.$SwitchMap$cn$Hanabi$gui$notifications$Notification$Type[Class84.Class307.ERROR.ordinal()] = 1;
-        }
-        catch (NoSuchFieldError noSuchFieldError) {}
-        try {
-            Class210.$SwitchMap$cn$Hanabi$gui$notifications$Notification$Type[Class84.Class307.INFO.ordinal()] = 2;
-        }
-        catch (NoSuchFieldError noSuchFieldError2) {}
-        try {
-            Class210.$SwitchMap$cn$Hanabi$gui$notifications$Notification$Type[Class84.Class307.SUCCESS.ordinal()] = 3;
-        }
-        catch (NoSuchFieldError noSuchFieldError3) {}
-        try {
-            Class210.$SwitchMap$cn$Hanabi$gui$notifications$Notification$Type[Class84.Class307.WARNING.ordinal()] = 4;
-        }
-        catch (NoSuchFieldError noSuchFieldError4) {}
-    }
+    String getDescription();
 }

@@ -1,39 +1,71 @@
 package cn.Hanabi.hmlProject;
 
-import cn.Hanabi.*;
 import java.util.*;
-import cn.Hanabi.modules.*;
-import cn.Hanabi.command.*;
+import java.lang.invoke.*;
+import ClassSub.*;
 
-public class HMLManager
+public final class HMLManager
 {
     public static ArrayList<HMLHook> hooks;
+    private static int a;
+    private static final long b;
     
-    public static boolean registerHook(final HMLHook hook) {
-        HMLManager.hooks.add(hook);
-        System.out.println("Hook " + hook.name + " Registered!");
+    public HMLManager() {
+        super();
+    }
+    
+    private static boolean registerHook(final HMLHook hmlHook) {
+        HMLManager.hooks.add(hmlHook);
         return true;
     }
     
-    public void onClientStarted(final Hanabi instance) {
-        for (final HMLHook hook : HMLManager.hooks) {
-            hook.onClientStarted(instance);
+    public static void onModuleManagerLoading$1baec85c() {
+        final int a = HMLManager.a;
+        final Iterator<HMLHook> iterator = HMLManager.hooks.iterator();
+        final int n = a;
+        while (iterator.hasNext()) {
+            iterator.next();
+            if (n != 0) {
+                break;
+            }
         }
     }
     
-    public void onModuleManagerLoading(final ModManager modManager) {
-        for (final HMLHook hook : HMLManager.hooks) {
-            hook.onModuleManagerLoading(modManager);
-        }
-    }
-    
-    public void onCommandManagerLoading(final CommandManager commandManager) {
-        for (final HMLHook hook : HMLManager.hooks) {
-            hook.onCommandManagerLoading(commandManager);
+    public static void onCommandManagerLoading$1aaa72d3() {
+        final int c = c();
+        final Iterator<HMLHook> iterator = HMLManager.hooks.iterator();
+        final int n = c;
+        while (iterator.hasNext()) {
+            iterator.next();
+            if (n == 0) {
+                break;
+            }
         }
     }
     
     static {
+        Class169.a(7534349950165298544L, 1201946715701004807L, MethodHandles.lookup().lookupClass()).a(270636946066758L);
+        final boolean a = false;
         HMLManager.hooks = new ArrayList<HMLHook>();
+        HMLManager.a = (a ? 1 : 0);
+    }
+    
+    public static void b(final int a) {
+        HMLManager.a = a;
+    }
+    
+    public static int b() {
+        return HMLManager.a;
+    }
+    
+    public static int c() {
+        if (HMLManager.a == 0) {
+            return 56;
+        }
+        return 0;
+    }
+    
+    private static RuntimeException a(final RuntimeException ex) {
+        return ex;
     }
 }

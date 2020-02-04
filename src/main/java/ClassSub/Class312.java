@@ -1,22 +1,24 @@
 package ClassSub;
 
-import com.google.common.base.*;
-import net.minecraft.scoreboard.*;
+import java.util.*;
 
-class Class312 implements Predicate<Score>
+public final class Class312
 {
-    final Class287 this$0;
-    public static final boolean Cracked_By_Somebody_Dumped_BY_Ganga_SupportedbySucen;
+    public static Class159 lastAlt;
+    public static ArrayList<Class159> registry;
     
-    Class312(final Class287 this$0) {
-        this.this$0 = this$0;
+    public Class312() {
+        super();
     }
     
-    public boolean apply(final Score score) {
-        return score.getPlayerName() != null && !score.getPlayerName().startsWith("#");
+    private static ArrayList<Class159> getRegistry() {
+        return Class312.registry;
     }
     
-    public boolean apply(final Object o) {
-        return this.apply((Score)o);
+    private static void setLastAlt$3ee860c8() {
+    }
+    
+    static {
+        Class312.registry = new ArrayList<Class159>();
     }
 }

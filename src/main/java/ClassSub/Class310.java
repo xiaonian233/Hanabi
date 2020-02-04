@@ -1,42 +1,18 @@
 package ClassSub;
 
-public class Class310<T extends Number>
+final class Class310
 {
-    private T x;
-    private T y;
-    private T z;
-    public static final boolean Cracked_By_Somebody_Dumped_BY_Ganga_SupportedbySucen;
+    int id;
+    Short yOffset;
+    Short width;
+    Short height;
+    String text;
     
-    public Class310(final T x, final T y, final T z) {
-        this.x = x;
-        this.y = y;
-        this.z = z;
+    private Class310() {
+        super();
     }
     
-    public Class310 setX(final T x) {
-        this.x = x;
-        return this;
-    }
-    
-    public Class310 setY(final T y) {
-        this.y = y;
-        return this;
-    }
-    
-    public Class310 setZ(final T z) {
-        this.z = z;
-        return this;
-    }
-    
-    public T getX() {
-        return this.x;
-    }
-    
-    public T getY() {
-        return this.y;
-    }
-    
-    public T getZ() {
-        return this.z;
+    Class310(final byte b) {
+        this();
     }
 }

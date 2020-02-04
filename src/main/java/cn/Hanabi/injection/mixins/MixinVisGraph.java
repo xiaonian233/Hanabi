@@ -15,14 +15,18 @@ public abstract class MixinVisGraph
     @Shadow
     private int field_178611_f;
     
-    private static int getIndex(final BlockPos pos) {
-        return getIndex(pos.getX() & 0xF, pos.getY() & 0xF, pos.getZ() & 0xF);
+    public MixinVisGraph() {
+        super();
     }
     
-    private static int getIndex(final int x, final int y, final int z) {
-        return x << 0 | y << 8 | z << 4;
+    private static int getIndex(final BlockPos blockPos) {
+        return (blockPos.func_177958_n() & 0xF) | (blockPos.func_177956_o() & 0xF) << 8 | (blockPos.func_177952_p() & 0xF) << 4;
+    }
+    
+    private static int getIndex(final int n, final int n2, final int n3) {
+        return n | n2 << 8 | n3 << 4;
     }
     
     @Shadow
-    public abstract Set<EnumFacing> func_178604_a(final int p0);
+    public abstract Set<EnumFacing> func_178604_a$7d02b99d();
 }

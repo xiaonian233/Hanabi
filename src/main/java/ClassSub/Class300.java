@@ -1,145 +1,161 @@
 package ClassSub;
 
 import java.awt.*;
-import org.jetbrains.annotations.*;
+import org.lwjgl.opengl.*;
 import net.minecraft.client.renderer.vertex.*;
 import net.minecraft.client.renderer.*;
-import org.lwjgl.opengl.*;
-import net.minecraft.client.*;
-import net.minecraft.client.gui.*;
+import java.lang.invoke.*;
 import java.util.*;
 
-public class Class300<T>
+public final class Class300
 {
-    static final int OFFSET = 3;
-    @NotNull
-    static Color BACKGROUND;
-    @NotNull
-    static Color BORDER;
-    @NotNull
-    static Color SELECTED;
-    static Color FOREGROUND;
-    @NotNull
-    private List<Class245<T>> tabs;
-    private int selectedTab;
-    private int selectedSubTab;
-    public static final boolean Cracked_By_Somebody_Dumped_BY_Ganga_SupportedbySucen;
+    private static Map<Integer, Boolean> glCapMap;
+    private static final long a;
     
     public Class300() {
-        this.tabs = new ArrayList<Class245<T>>();
-        this.selectedTab = 0;
-        this.selectedSubTab = -1;
+        super();
+    }
+    
+    public static void setColor(final Color color) {
+        GL11.glColor4f(color.getRed() / 255.0f, color.getGreen() / 255.0f, color.getBlue() / 255.0f, color.getAlpha() / 255.0f);
+    }
+    
+    public static void setGLCap(final int n, final boolean b) {
+        final int[] b2 = Class139.b();
+        Class300.glCapMap.put(n, GL11.glGetBoolean(n));
+        final int[] array = b2;
+        int n2 = b ? 1 : 0;
+        if (array == null) {
+            if (b) {
+                GL11.glEnable(n);
+                if (array == null) {
+                    return;
+                }
+            }
+            n2 = n;
+        }
+        GL11.glDisable(n2);
+    }
+    
+    private static void revertGLCap(final int n) {
+        final int[] b = Class139.b();
+        final Boolean b2 = Class300.glCapMap.get(n);
+        final int[] array = b;
+        final Boolean b3 = b2;
+        if (array != null || b3 != null) {
+            final int booleanValue = ((boolean)b3) ? 1 : 0;
+            if (array == null && booleanValue != 0) {
+                GL11.glEnable(n);
+                if (array != null) {
+                    goto Label_0047;
+                }
+            }
+            else {
+                GL11.glDisable(booleanValue);
+            }
+        }
+    }
+    
+    private static void glEnable(final int n) {
+        setGLCap(n, true);
+    }
+    
+    private static void glDisable(final int n) {
+        setGLCap(n, false);
+    }
+    
+    public static void revertAllCaps() {
+        final int[] b = Class139.b();
+        final Iterator<Integer> iterator = Class300.glCapMap.keySet().iterator();
+        final int[] array = b;
+        while (iterator.hasNext()) {
+            final int intValue = iterator.next();
+            final int[] b2 = Class139.b();
+            final Boolean b3 = Class300.glCapMap.get(intValue);
+            final int[] array2 = b2;
+            final Boolean b4 = b3;
+            if (array2 != null || b4 != null) {
+                final int booleanValue = ((boolean)b4) ? 1 : 0;
+                if (array2 == null && booleanValue != 0) {
+                    GL11.glEnable(intValue);
+                    if (array2 != null) {
+                        goto Label_0090;
+                    }
+                }
+                else {
+                    GL11.glDisable(booleanValue);
+                }
+            }
+            if (array != null) {
+                break;
+            }
+        }
+    }
+    
+    private static void setColor(int n) {
+        final int n2 = n & 0xFF;
+        final int n3 = n >> 8 & 0xFF;
+        final int n4 = n >> 16 & 0xFF;
+        n = (n >> 24 & 0xFF);
+        GL11.glColor4b((byte)n2, (byte)n3, (byte)n4, (byte)n);
+    }
+    
+    public static int toRGBA(final Color color) {
+        return color.getRed() | color.getGreen() << 8 | color.getBlue() << 16 | color.getAlpha() << 24;
     }
     
     public static void drawRect(final int n, int n2, int n3, int n4, int n5, final int n6) {
-        if (n2 < n4) {
-            final int n7 = n2;
-            n2 = n4;
-            n4 = n7;
-        }
-        if (n3 < n5) {
-            final int n8 = n3;
-            n3 = n5;
-            n5 = n8;
-        }
-        final float n9 = (n6 >> 24 & 0xFF) / 255.0f;
-        final float n10 = (n6 >> 16 & 0xFF) / 255.0f;
-        final float n11 = (n6 >> 8 & 0xFF) / 255.0f;
-        final float n12 = (n6 & 0xFF) / 255.0f;
-        final Tessellator getInstance = Tessellator.getInstance();
-        final WorldRenderer getWorldRenderer = getInstance.getWorldRenderer();
-        GlStateManager.enableBlend();
-        GlStateManager.disableTexture2D();
-        GlStateManager.tryBlendFuncSeparate(770, 771, 1, 0);
-        GlStateManager.color(n10, n11, n12, n9);
-        getWorldRenderer.begin(n, DefaultVertexFormats.POSITION);
-        getWorldRenderer.pos((double)n2, (double)n5, 0.0).endVertex();
-        getWorldRenderer.pos((double)n4, (double)n5, 0.0).endVertex();
-        getWorldRenderer.pos((double)n4, (double)n3, 0.0).endVertex();
-        getWorldRenderer.pos((double)n2, (double)n3, 0.0).endVertex();
-        getInstance.draw();
-        GlStateManager.enableTexture2D();
-        GlStateManager.disableBlend();
-    }
-    
-    public void addTab(final Class245<T> class245) {
-        this.tabs.add(class245);
-    }
-    
-    public void render(final int n, final int n2) {
-        GL11.glTranslated((double)n, (double)n2, 0.0);
-        final FontRenderer fontRendererObj = Minecraft.getMinecraft().fontRendererObj;
-        final int n3 = (fontRendererObj.FONT_HEIGHT + 3) * this.tabs.size();
-        int getStringWidth = 0;
-        for (final Class245<T> class245 : this.tabs) {
-            if (fontRendererObj.getStringWidth(class245.getText()) > getStringWidth) {
-                getStringWidth = fontRendererObj.getStringWidth(class245.getText());
+        final int[] b = Class139.b();
+        int n8;
+        final int n7 = n8 = n2;
+        int n10;
+        final int n9 = n10 = n4;
+        if (b == null) {
+            if (n7 < n9) {
+                final int n11 = n2;
+                n2 = n4;
+                n4 = n11;
             }
+            final int n12;
+            n8 = (n12 = n3);
+            final int n13;
+            n10 = (n13 = n5);
         }
-        getStringWidth += 4;
-        drawRect(7, 0, 0, getStringWidth, n3, Class300.BACKGROUND.getRGB());
-        int n4 = 2;
-        int n5 = 0;
-        for (final Class245<T> class246 : this.tabs) {
-            if (this.selectedTab == n5) {
-                drawRect(7, 0, n4 - 2, getStringWidth, n4 + fontRendererObj.FONT_HEIGHT + 3 - 2, Class300.SELECTED.getRGB());
-                if (this.selectedSubTab != -1) {
-                    class246.renderSubTabs(getStringWidth, n4 - 2, this.selectedSubTab);
-                }
+        if (b == null) {
+            if (n7 < n9) {
+                final int n14 = n3;
+                n3 = n5;
+                n5 = n14;
             }
-            fontRendererObj.drawString(class246.getText(), 2, n4, Class300.FOREGROUND.getRGB());
-            n4 += fontRendererObj.FONT_HEIGHT + 3;
-            ++n5;
+            n8 = n6 >> 24;
+            n10 = 255;
         }
-        GL11.glLineWidth(1.0f);
-        drawRect(2, 0, 0, getStringWidth, n3, Class300.BORDER.getRGB());
-        GL11.glTranslated((double)(-n), (double)(-n2), 0.0);
-    }
-    
-    public void handleKey(final int n) {
-        if (n == 208) {
-            if (this.selectedSubTab == -1) {
-                ++this.selectedTab;
-                if (this.selectedTab >= this.tabs.size()) {
-                    this.selectedTab = 0;
-                }
-            }
-            else {
-                ++this.selectedSubTab;
-                if (this.selectedSubTab >= this.tabs.get(this.selectedTab).getSubTabs().size()) {
-                    this.selectedSubTab = 0;
-                }
-            }
-        }
-        else if (n == 200) {
-            if (this.selectedSubTab == -1) {
-                --this.selectedTab;
-                if (this.selectedTab < 0) {
-                    this.selectedTab = this.tabs.size() - 1;
-                }
-            }
-            else {
-                --this.selectedSubTab;
-                if (this.selectedSubTab < 0) {
-                    this.selectedSubTab = this.tabs.get(this.selectedTab).getSubTabs().size() - 1;
-                }
-            }
-        }
-        else if (n == 203) {
-            this.selectedSubTab = -1;
-        }
-        else if (this.selectedSubTab == -1 && (n == 28 || n == 205)) {
-            this.selectedSubTab = 0;
-        }
-        else if (n == 28 || n == 205) {
-            this.tabs.get(this.selectedTab).getSubTabs().get(this.selectedSubTab).press();
-        }
+        final float n15 = (n8 & n10) / 255.0f;
+        final float n16 = (n6 >> 16 & 0xFF) / 255.0f;
+        final float n17 = (n6 >> 8 & 0xFF) / 255.0f;
+        final float n18 = (n6 & 0xFF) / 255.0f;
+        final Tessellator func_178181_a;
+        final WorldRenderer func_178180_c = (func_178181_a = Tessellator.func_178181_a()).func_178180_c();
+        GlStateManager.func_179147_l();
+        GlStateManager.func_179090_x();
+        GlStateManager.func_179120_a(770, 771, 1, 0);
+        GlStateManager.func_179131_c(n16, n17, n18, n15);
+        func_178180_c.func_181668_a(n, DefaultVertexFormats.field_181705_e);
+        func_178180_c.func_181662_b((double)n2, (double)n5, 0.0).func_181675_d();
+        func_178180_c.func_181662_b((double)n4, (double)n5, 0.0).func_181675_d();
+        func_178180_c.func_181662_b((double)n4, (double)n3, 0.0).func_181675_d();
+        func_178180_c.func_181662_b((double)n2, (double)n3, 0.0).func_181675_d();
+        func_178181_a.func_78381_a();
+        GlStateManager.func_179098_w();
+        GlStateManager.func_179084_k();
     }
     
     static {
-        Class300.BACKGROUND = new Color(0, 0, 0, 175);
-        Class300.BORDER = new Color(0, 0, 0, 255);
-        Class300.SELECTED = new Color(38, 164, 78, 200);
-        Class300.FOREGROUND = Color.white;
+        Class169.a(226989032112849929L, 5176383953070152701L, MethodHandles.lookup().lookupClass()).a(94637738816624L);
+        Class300.glCapMap = new HashMap<Integer, Boolean>();
+    }
+    
+    private static RuntimeException a(final RuntimeException ex) {
+        return ex;
     }
 }

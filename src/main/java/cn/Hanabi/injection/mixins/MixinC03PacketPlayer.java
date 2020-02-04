@@ -5,61 +5,64 @@ import net.minecraft.network.play.client.*;
 import org.spongepowered.asm.mixin.*;
 
 @Mixin({ C03PacketPlayer.class })
-public class MixinC03PacketPlayer implements IC03PacketPlayer
+public final class MixinC03PacketPlayer implements IC03PacketPlayer
 {
     @Shadow
-    protected boolean onGround;
+    private boolean field_149474_g;
     @Shadow
-    protected double y;
+    private double field_149477_b;
     @Shadow
-    protected float yaw;
+    private float field_149476_e;
     @Shadow
-    protected float pitch;
+    private float field_149473_f;
     @Shadow
-    protected boolean rotating;
+    private boolean field_149481_i;
     
-    @Override
-    public boolean isOnGround() {
-        return this.onGround;
+    public MixinC03PacketPlayer() {
+        super();
     }
     
     @Override
-    public void setOnGround(final boolean b) {
-        this.onGround = b;
+    public final boolean isOnGround() {
+        return this.field_149474_g;
     }
     
     @Override
-    public void setPosY(final double y2) {
-        this.y = y2;
+    public final void setOnGround(final boolean field_149474_g) {
+        this.field_149474_g = field_149474_g;
     }
     
     @Override
-    public void setYaw(final float f) {
-        this.yaw = f;
+    public final void setPosY$133369() {
     }
     
     @Override
-    public float getYaw() {
-        return this.yaw;
+    public final void setYaw(final float field_149476_e) {
+        this.field_149476_e = field_149476_e;
     }
     
     @Override
-    public void setPitch(final float f) {
-        this.pitch = f;
+    public final float getYaw() {
+        return this.field_149476_e;
     }
     
     @Override
-    public float getPitch() {
-        return this.pitch;
+    public final void setPitch(final float field_149473_f) {
+        this.field_149473_f = field_149473_f;
     }
     
     @Override
-    public void setRotate(final boolean b) {
-        this.rotating = b;
+    public final float getPitch() {
+        return this.field_149473_f;
     }
     
     @Override
-    public boolean getRotate() {
-        return this.rotating;
+    public final void setRotate$1385ff() {
+        this.field_149481_i = true;
+    }
+    
+    @Override
+    public final boolean getRotate() {
+        return this.field_149481_i;
     }
 }

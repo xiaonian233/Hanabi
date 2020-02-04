@@ -2,11 +2,14 @@ package cn.Hanabi.events;
 
 import com.darkmagician6.eventapi.events.*;
 import net.minecraft.entity.*;
+import cn.Hanabi.modules.*;
+import java.lang.invoke.*;
+import ClassSub.*;
 
-public class EventRenderLivingEntity implements Event, Cancellable
+public final class EventRenderLivingEntity implements Cancellable, Event
 {
-    private EntityLivingBase entity;
-    private boolean pre;
+    public EntityLivingBase entity;
+    public boolean pre;
     private float limbSwing;
     private float limbSwingAmount;
     private float ageInTicks;
@@ -15,100 +18,118 @@ public class EventRenderLivingEntity implements Event, Cancellable
     private float chestRot;
     private float offset;
     public boolean cancelled;
+    private static final long a;
     
-    public EventRenderLivingEntity(final EntityLivingBase entity, final boolean pre, final float limbSwing, final float limbSwingAmount, final float ageInTicks, final float rotationYawHead, final float rotationPitch, final float chestRot, final float offset) {
+    public EventRenderLivingEntity(final EntityLivingBase entity, final float limbSwing, final float limbSwingAmount, final float ageInTicks, final float rotationYawHead, final float rotationPitch, final float chestRot) {
+        super();
         this.entity = entity;
-        this.pre = pre;
+        this.pre = true;
+        final String[] b = EventPacket.b();
         this.limbSwing = limbSwing;
         this.limbSwingAmount = limbSwingAmount;
         this.ageInTicks = ageInTicks;
         this.rotationYawHead = rotationYawHead;
         this.rotationPitch = rotationPitch;
         this.chestRot = chestRot;
-        this.offset = offset;
+        final String[] array = b;
+        this.offset = 0.0625f;
         this.cancelled = false;
+        if (array == null) {
+            Mod.b(new Mod[3]);
+        }
     }
     
-    public EventRenderLivingEntity(final EntityLivingBase entity, final boolean pre) {
+    public EventRenderLivingEntity(final EntityLivingBase entity) {
+        super();
         this.entity = entity;
-        this.pre = pre;
+        this.pre = false;
     }
     
-    public EntityLivingBase getEntity() {
+    private EntityLivingBase getEntity() {
         return this.entity;
     }
     
-    public boolean isPre() {
+    private boolean isPre() {
         return this.pre;
     }
     
-    public boolean isPost() {
-        return !this.pre;
+    private boolean isPost() {
+        final String[] b = EventPacket.b();
+        final boolean pre = this.pre;
+        return (b == null || !pre) && pre;
     }
     
-    public float getLimbSwing() {
+    private float getLimbSwing() {
         return this.limbSwing;
     }
     
-    public void setLimbSwing(final float limbSwing) {
+    private void setLimbSwing(final float limbSwing) {
         this.limbSwing = limbSwing;
     }
     
-    public float getLimbSwingAmount() {
+    private float getLimbSwingAmount() {
         return this.limbSwingAmount;
     }
     
-    public void setLimbSwingAmount(final float limbSwingAmount) {
+    private void setLimbSwingAmount(final float limbSwingAmount) {
         this.limbSwingAmount = limbSwingAmount;
     }
     
-    public float getAgeInTicks() {
+    private float getAgeInTicks() {
         return this.ageInTicks;
     }
     
-    public void setAgeInTicks(final float ageInTicks) {
+    private void setAgeInTicks(final float ageInTicks) {
         this.ageInTicks = ageInTicks;
     }
     
-    public float getRotationYawHead() {
+    private float getRotationYawHead() {
         return this.rotationYawHead;
     }
     
-    public void setRotationYawHead(final float rotationYawHead) {
+    private void setRotationYawHead(final float rotationYawHead) {
         this.rotationYawHead = rotationYawHead;
     }
     
-    public float getRotationPitch() {
+    private float getRotationPitch() {
         return this.rotationPitch;
     }
     
-    public void setRotationPitch(final float rotationPitch) {
+    private void setRotationPitch(final float rotationPitch) {
         this.rotationPitch = rotationPitch;
     }
     
-    public float getOffset() {
+    private float getOffset() {
         return this.offset;
     }
     
-    public void setOffset(final float offset) {
+    private void setOffset(final float offset) {
         this.offset = offset;
     }
     
-    public float getRotationChest() {
+    private float getRotationChest() {
         return this.chestRot;
     }
     
-    public void setRotationChest(final float rotationChest) {
-        this.chestRot = rotationChest;
+    private void setRotationChest(final float chestRot) {
+        this.chestRot = chestRot;
     }
     
     @Override
-    public boolean isCancelled() {
+    public final boolean isCancelled() {
         return this.cancelled;
     }
     
     @Override
-    public void setCancelled(final boolean state) {
-        this.cancelled = state;
+    public final void setCancelled$1385ff() {
+        this.cancelled = true;
+    }
+    
+    static {
+        Class169.a(5500323147757305711L, 377800683421244478L, MethodHandles.lookup().lookupClass()).a(268494885746735L);
+    }
+    
+    private static RuntimeException a(final RuntimeException ex) {
+        return ex;
     }
 }

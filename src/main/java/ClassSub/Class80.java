@@ -1,40 +1,55 @@
 package ClassSub;
 
+import cn.Hanabi.modules.*;
 import java.util.*;
-import javax.vecmath.*;
+import java.lang.invoke.*;
 
-class Class80
+final class Class80 extends Class339
 {
-    private boolean aac;
-    private float smooth;
-    private Random random;
-    public static final boolean Cracked_By_Somebody_Dumped_BY_Ganga_SupportedbySucen;
+    private Mod val$selectedMod;
+    private Class338 this$0;
+    private static final long a;
     
-    public Class80(final boolean aac, final float smooth) {
-        this.aac = aac;
-        this.smooth = smooth;
-        this.random = new Random();
+    Class80(final Class338 this$0, final String s, final boolean b, final Mod val$selectedMod) {
+        this.this$0 = this$0;
+        this.val$selectedMod = val$selectedMod;
+        super(s, b);
     }
     
-    public Class209 calculateAngle(final Vector3d vector3d, final Vector3d vector3d2) {
-        final Class209 class209 = new Class209();
-        vector3d.x += (this.aac ? this.randomFloat(-0.75f, 0.75f) : 0.0f) - vector3d2.x;
-        vector3d.y += (this.aac ? this.randomFloat(-0.25f, 0.5f) : 0.0f) - vector3d2.y;
-        vector3d.z += (this.aac ? this.randomFloat(-0.75f, 0.75f) : 0.0f) - vector3d2.z;
-        final double hypot = Math.hypot(vector3d.x, vector3d.z);
-        class209.setYaw((float)(Math.atan2(vector3d.z, vector3d.x) * 57.29577951308232) - 90.0f);
-        class209.setPitch(-(float)(Math.atan2(vector3d.y, hypot) * 57.29577951308232));
-        return class209.constrantAngle();
+    @Override
+    public final void onPress() {
+        final int[] b = Class139.b();
+        final Mod val$selectedMod = this.val$selectedMod;
+        final boolean state = this.val$selectedMod.state;
+        if (b == null && state) {}
+        val$selectedMod.setState(state, true);
+        for (final Class68 class68 : this.this$0.mods) {
+            if (b != null) {
+                return;
+            }
+            final Class68 class69 = class68;
+            if (b != null || class69.mod == this.val$selectedMod) {
+                class69.button.toggle();
+                if (b == null) {
+                    break;
+                }
+            }
+            if (b != null) {
+                break;
+            }
+        }
+        super.onPress();
     }
     
-    public Class209 smoothAngle(final Class209 class209, final Class209 class210) {
-        final Class209 constrantAngle = new Class209(class210.getYaw() - class209.getYaw(), class210.getPitch() - class209.getPitch()).constrantAngle();
-        constrantAngle.setYaw(class210.getYaw() - constrantAngle.getYaw() / 100.0f * this.smooth);
-        constrantAngle.setPitch(class210.getPitch() - constrantAngle.getPitch() / 100.0f * this.smooth);
-        return constrantAngle.constrantAngle();
+    static {
+        Class169.a(-5543514073227156726L, 6826199686849176433L, MethodHandles.lookup().lookupClass()).a(12663808965583L);
     }
     
-    public float randomFloat(final float n, final float n2) {
-        return n + this.random.nextFloat() * (n2 - n);
+    private static RuntimeException a(final RuntimeException ex) {
+        return ex;
+    }
+    
+    private static boolean lIIIlIIllIIl(final Object o, final Object o2) {
+        return o == o2;
     }
 }

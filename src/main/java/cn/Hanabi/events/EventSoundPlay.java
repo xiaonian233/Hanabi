@@ -3,26 +3,27 @@ package cn.Hanabi.events;
 import com.darkmagician6.eventapi.events.*;
 import net.minecraft.entity.*;
 
-public class EventSoundPlay implements Event
+public final class EventSoundPlay implements Event
 {
-    public Entity entity;
-    public String name;
+    private Entity entity;
+    private String name;
     public boolean cancel;
     
     public EventSoundPlay(final Entity entity, final String name) {
+        super();
         this.entity = entity;
         this.name = name;
     }
     
-    public Entity getEntity() {
+    private Entity getEntity() {
         return this.entity;
     }
     
-    public String getName() {
+    private String getName() {
         return this.name;
     }
     
-    public void setCancelled(final boolean b) {
-        this.cancel = b;
+    private void setCancelled(final boolean cancel) {
+        this.cancel = cancel;
     }
 }

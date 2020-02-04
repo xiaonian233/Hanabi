@@ -5,20 +5,22 @@ import net.minecraft.network.play.server.*;
 import org.spongepowered.asm.mixin.*;
 
 @Mixin({ S08PacketPlayerPosLook.class })
-public class MixinS08PacketPlayerPosLook implements IS08PacketPlayerPosLook
+public final class MixinS08PacketPlayerPosLook implements IS08PacketPlayerPosLook
 {
     @Shadow
-    private float yaw;
+    private float field_148936_d;
     @Shadow
-    private float pitch;
+    private float field_148937_e;
     
-    @Override
-    public void setYaw(final float y) {
-        this.yaw = y;
+    public MixinS08PacketPlayerPosLook() {
+        super();
     }
     
     @Override
-    public void setPitch(final float p) {
-        this.pitch = p;
+    public final void setYaw$133aeb() {
+    }
+    
+    @Override
+    public final void setPitch$133aeb() {
     }
 }

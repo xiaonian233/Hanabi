@@ -6,7 +6,7 @@ public interface IC03PacketPlayer
     
     void setOnGround(final boolean p0);
     
-    void setPosY(final double p0);
+    void setPosY$133369();
     
     void setYaw(final float p0);
     
@@ -16,7 +16,7 @@ public interface IC03PacketPlayer
     
     float getPitch();
     
-    void setRotate(final boolean p0);
+    void setRotate$1385ff();
     
     boolean getRotate();
 }

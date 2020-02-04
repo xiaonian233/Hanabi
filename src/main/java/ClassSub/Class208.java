@@ -1,106 +1,33 @@
 package ClassSub;
 
-import net.minecraft.client.gui.*;
-import cn.Hanabi.injection.interfaces.*;
-import net.minecraft.util.*;
-import cn.Hanabi.modules.*;
-import java.util.*;
-import cn.Hanabi.modules.Player.*;
-import cn.Hanabi.*;
-import java.io.*;
-
-public class Class208 extends GuiScreen
+final class Class208
 {
-    Class33 sideBar;
-    List<Class77> windows;
-    public static final boolean Cracked_By_Somebody_Dumped_BY_Ganga_SupportedbySucen;
+    static final int[] $SwitchMap$cn$Hanabi$gui$notifications$Notification$Type;
     
-    public Class208() {
-        this.windows = new ArrayList<Class77>();
+    static {
+        final int[] array = $SwitchMap$cn$Hanabi$gui$notifications$Notification$Type = new int[Class153.values().length];
+        final Class153 error = Class153.ERROR;
         try {
-            this.sideBar = new Class33();
-            for (int i = 0; i < Category.values().length; ++i) {
-                this.windows.add(new Class77(Category.values()[i]));
-            }
+            array[error.ordinal()] = 1;
         }
-        catch (Throwable t) {}
-    }
-    
-    public void initGui() {
+        catch (NoSuchFieldError noSuchFieldError) {}
+        final int[] $SwitchMap$cn$Hanabi$gui$notifications$Notification$Type2 = Class208.$SwitchMap$cn$Hanabi$gui$notifications$Notification$Type;
+        final Class153 info = Class153.INFO;
         try {
-            if (this.mc.theWorld != null) {
-                ((IEntityRenderer)this.mc.entityRenderer).loadShader2(new ResourceLocation("shaders/post/blur.json"));
-            }
-            final Iterator<Mod> iterator = ModManager.getModList().iterator();
-            while (iterator.hasNext()) {
-                iterator.next().modButton = null;
-            }
-            final Iterator<Class77> iterator2 = this.windows.iterator();
-            while (iterator2.hasNext()) {
-                iterator2.next().createModUI();
-            }
-            Class77.booleanValueMap.clear();
+            $SwitchMap$cn$Hanabi$gui$notifications$Notification$Type2[info.ordinal()] = 2;
         }
-        catch (Throwable t) {
-            Class200.tellPlayer("§b[Hanabi]§a加载Blur出现异常，建议关闭快速渲染�??");
-        }
-    }
-    
-    public void drawScreen(final int n, final int n2, final float n3) {
-        if (ModManager.getModule("StaffAnalyzer").isEnabled() && StaffAnalyzer.ui != null) {
-            StaffAnalyzer.ui.mouseListener(n, n2);
-        }
-        if (Hanabi.INSTANCE.sbm != null) {
-            Hanabi.INSTANCE.sbm.moveWindow(n, n2);
-        }
+        catch (NoSuchFieldError noSuchFieldError2) {}
+        final int[] $SwitchMap$cn$Hanabi$gui$notifications$Notification$Type3 = Class208.$SwitchMap$cn$Hanabi$gui$notifications$Notification$Type;
+        final Class153 success = Class153.SUCCESS;
         try {
-            this.sideBar.draw();
-            for (final Class81 class81 : this.sideBar.button) {
-                if (class81.active) {
-                    for (final Class77 class82 : this.windows) {
-                        if (class82.category.toString().equals(class81.title)) {
-                            class82.draw(n, n2);
-                            break;
-                        }
-                    }
-                    break;
-                }
-            }
+            $SwitchMap$cn$Hanabi$gui$notifications$Notification$Type3[success.ordinal()] = 3;
         }
-        catch (Throwable t) {}
-    }
-    
-    protected void mouseReleased(final int n, final int n2, final int n3) {
-    }
-    
-    protected void mouseClicked(final int n, final int n2, final int n3) throws IOException {
+        catch (NoSuchFieldError noSuchFieldError3) {}
+        final int[] $SwitchMap$cn$Hanabi$gui$notifications$Notification$Type4 = Class208.$SwitchMap$cn$Hanabi$gui$notifications$Notification$Type;
+        final Class153 warning = Class153.WARNING;
         try {
-            this.sideBar.onMouseClick(n, n2);
-            for (final Class81 class81 : this.sideBar.button) {
-                if (class81.active) {
-                    for (final Class77 class82 : this.windows) {
-                        if (class82.category.toString().equals(class81.title)) {
-                            class82.onMouseClick(n, n2);
-                            break;
-                        }
-                    }
-                    break;
-                }
-            }
+            $SwitchMap$cn$Hanabi$gui$notifications$Notification$Type4[warning.ordinal()] = 4;
         }
-        catch (Throwable t) {}
-    }
-    
-    private boolean isHovering(final int n, final int n2, final int n3, final int n4, final int n5, final int n6) {
-        return n > n3 && n < n5 && n2 > n4 && n2 < n6;
-    }
-    
-    public void onGuiClosed() {
-        try {
-            this.mc.entityRenderer.stopUseShader();
-        }
-        catch (Throwable t) {
-            Class200.tellPlayer("§b[Hanabi]§a加载Blur出现异常，建议关闭快速渲染�??");
-        }
+        catch (NoSuchFieldError noSuchFieldError4) {}
     }
 }

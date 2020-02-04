@@ -1,117 +1,245 @@
 package ClassSub;
 
-import net.minecraft.client.*;
 import net.minecraft.client.gui.*;
-import net.minecraft.util.*;
-import cn.Hanabi.*;
-import cn.Hanabi.modules.*;
-import cn.Hanabi.hmlProject.*;
-import java.awt.*;
-import org.lwjgl.opengl.*;
+import java.lang.invoke.*;
+import java.nio.charset.*;
+import javax.crypto.*;
 import java.util.*;
-import cn.Hanabi.utils.fontmanager.*;
-import net.minecraft.client.renderer.vertex.*;
-import net.minecraft.client.renderer.*;
-import java.io.*;
+import javax.crypto.spec.*;
+import java.security.*;
 
-public class Class151 extends GuiScreen
+public final class Class151
 {
-    public ArrayList<Class123> slots;
-    public ScaledResolution sr;
-    public Class205 timer;
-    public boolean coolDown;
-    public static final boolean Cracked_By_Somebody_Dumped_BY_Ganga_SupportedbySucen;
+    private GuiScreen screen;
+    private String text;
+    public int animatedY;
+    private boolean init;
+    public String icon;
+    private Class46 handler;
+    private static final long a;
+    static final String[] lIlIllIIIl;
     
-    public Class151() {
-        this.slots = new ArrayList<Class123>();
-        this.timer = new Class205();
-        this.coolDown = true;
+    public Class151(final String icon) {
+        super();
+        this.animatedY = 0;
+        new Class46();
+        this.icon = icon;
     }
     
-    public void initGui() {
-        this.sr = new ScaledResolution(Minecraft.getMinecraft());
-        this.coolDown = true;
-        this.timer.reset();
-        this.slots.clear();
-        this.slots.add(new Class123("单人游戏", HanabiFonts.ICON_MAINMENU_SINGLE, (GuiScreen)new GuiSelectWorld((GuiScreen)this)));
-        this.slots.add(new Class123("多人游戏", HanabiFonts.ICON_MAINMENU_MULTI, (GuiScreen)new GuiMultiplayer((GuiScreen)this)));
-        this.slots.add(new Class123("黑卡管理", HanabiFonts.ICON_MAINMENU_ALTMANAGER, new Class7()));
-        this.slots.add(new Class123("游戏设置", HanabiFonts.ICON_MAINMENU_SETTINGS, (GuiScreen)new GuiOptions((GuiScreen)this, this.mc.gameSettings)));
-        this.slots.add(new Class123("�?出游�?", HanabiFonts.ICON_MAINMENU_QUITGAME, null));
-    }
-    
-    public void drawScreen(final int n, final int n2, final float n3) {
-        this.sr = new ScaledResolution(Minecraft.getMinecraft());
-        if (this.coolDown && this.timer.isDelayComplete(500L)) {
-            this.coolDown = false;
-            this.timer.reset();
-        }
-        Class246.drawImage(new ResourceLocation("Client/mainmenu/mainmenu.png"), 0, 0, this.sr.getScaledWidth(), this.sr.getScaledHeight());
-        int n4 = this.sr.getScaledWidth() / 2 - 150;
-        final int n5 = this.sr.getScaledHeight() / 2;
-        for (final Class123 class123 : this.slots) {
-            class123.draw(n, n2, n4, n5);
-            if (!this.coolDown && !Hanabi.INSTANCE.loadFont) {
-                class123.onClick(n, n2, n4, n5);
+    private void draw$3b4dfe4b(final int n, final int n2) {
+        final int[] b = Class139.b();
+        this.animatedY = (int)Class69.getAnimationState(this.animatedY, n2, 200.0);
+        Class69.circle(n, this.animatedY, 30.0f, Class22.WHITE.c);
+        final String icon = this.icon;
+        final int hashCode = icon.hashCode();
+        if (b == null) {
+            Label_0208: {
+                switch (hashCode) {
+                    case 59658: {
+                        final boolean b3;
+                        final boolean b2 = b3 = icon.equals(Class151.lIlIllIIIl[0]);
+                        if (b != null) {
+                            break;
+                        }
+                        if (b2 && b != null) {
+                            break Label_0208;
+                        }
+                        break;
+                    }
+                    case 59660: {
+                        final boolean b3;
+                        final boolean b4 = b3 = icon.equals(Class151.lIlIllIIIl[1]);
+                        if (b != null) {
+                            break;
+                        }
+                        if (b4 && b != null) {
+                            break Label_0208;
+                        }
+                        break;
+                    }
+                    case 59666: {
+                        final boolean b3;
+                        final boolean b5 = b3 = icon.equals(Class151.lIlIllIIIl[2]);
+                        if (b != null) {
+                            break;
+                        }
+                        if (b5 && b != null) {
+                            break Label_0208;
+                        }
+                        break;
+                    }
+                    case 59661: {
+                        final boolean b3;
+                        final boolean b6 = b3 = icon.equals(Class151.lIlIllIIIl[3]);
+                        if (b != null) {
+                            break;
+                        }
+                        if (b6 && b != null) {
+                            break Label_0208;
+                        }
+                        break;
+                    }
+                    case 59664: {
+                        final boolean b3;
+                        final boolean b7 = b3 = icon.equals(Class151.lIlIllIIIl[4]);
+                        if (b != null) {
+                            break;
+                        }
+                        if (b7) {
+                            break;
+                        }
+                        break;
+                    }
+                }
             }
-            n4 += 70;
         }
-        final String string = "欢迎回来, " + Mod.fuck;
-        Hanabi.INSTANCE.fontManager.wqy18.drawString(string, this.sr.getScaledWidth() - 55 - Hanabi.INSTANCE.fontManager.wqy18.getStringWidth(string), 20.0f, -1);
-        final int size = HMLManager.hooks.size();
-        Hanabi.INSTANCE.fontManager.wqy18.drawString("已加�?" + size + "个HML Module.", 3, 2, Color.GREEN.getRGB());
-        if (size > 0) {
-            Hanabi.INSTANCE.fontManager.wqy18.drawString("警告！HML Project尚不完善，可能导致不可预料的错误�?", 3, 13, Color.RED.getRGB());
+        Label_0432: {
+            Label_0391: {
+                Label_0350: {
+                    Label_0309: {
+                        if (b == null) {
+                            switch (hashCode) {
+                                case 0: {
+                                    Class139.INSTANCE.fontManager.icon70.drawString(this.icon, n - 17.0f, this.animatedY - 19, Class22.GREY.c);
+                                    break;
+                                }
+                                case 1: {
+                                    break Label_0309;
+                                }
+                                case 2: {
+                                    break Label_0350;
+                                }
+                                case 3: {
+                                    break Label_0391;
+                                }
+                                case 4: {
+                                    break Label_0432;
+                                }
+                            }
+                        }
+                        if (b == null) {
+                            return;
+                        }
+                    }
+                    Class139.INSTANCE.fontManager.icon100.drawString(this.icon, n - 24.0f, this.animatedY - 28, Class22.GREY.c);
+                    if (b == null) {
+                        return;
+                    }
+                }
+                Class139.INSTANCE.fontManager.icon70.drawString(this.icon, n - 17.0f, this.animatedY - 20, Class22.GREY.c);
+                if (b == null) {
+                    return;
+                }
+            }
+            Class139.INSTANCE.fontManager.icon70.drawString(this.icon, n - 17.0f, this.animatedY - 19, Class22.GREY.c);
+            if (b == null) {
+                return;
+            }
         }
-        GL11.glPushMatrix();
-        GL11.glColor4f(1.0f, 1.0f, 1.0f, 0.0f);
-        GL11.glDisable(2929);
-        GL11.glEnable(3042);
-        GL11.glDepthMask(false);
-        OpenGlHelper.glBlendFunc(770, 771, 1, 0);
-        GL11.glColor4f(1.0f, 1.0f, 1.0f, 1.0f);
-        Minecraft.getMinecraft().getRenderManager().renderEngine.bindTexture(new ResourceLocation("Client/mainmenu/avatar.png"));
-        this.drawScaledTexturedModalRect(this.sr.getScaledWidth() - 46, 9.0, 0.0, 0.0, 32.0, 32.0, 8.1f);
-        GL11.glDepthMask(true);
-        GL11.glDisable(3042);
-        GL11.glEnable(2929);
-        Class246.drawArc(this.sr.getScaledWidth() - 30, 25.0f, 16.0, Class15.WHITE.c, 0, 360.0, 2);
-        GL11.glPopMatrix();
-        Hanabi.INSTANCE.fontManager.comfortaa17.drawString("HML Project API - Build 0", 2.0f, this.sr.getScaledHeight() - 20, -1);
-        if (Hanabi.INSTANCE.loadFont) {
-            final UnicodeFontRenderer wqy18 = Hanabi.INSTANCE.fontManager.wqy18;
-            final StringBuilder append = new StringBuilder().append("正在加载剩余字体,请稍�?... (");
-            final FontManager fontManager = Hanabi.INSTANCE.fontManager;
-            wqy18.drawString(append.append(FontManager.fontName).append(")").toString(), 2.0f, this.sr.getScaledHeight() - 10, -1);
-        }
-        else {
-            Hanabi.INSTANCE.fontManager.comfortaa17.drawString("Hanabi build 1.5.1 - by Margele", 2.0f, this.sr.getScaledHeight() - 10, -1);
-        }
-        super.drawScreen(n, n2, n3);
+        Class139.INSTANCE.fontManager.icon70.drawString(this.icon, n - 17.0f, this.animatedY - 19, Class22.GREY.c);
     }
     
-    public void drawScaledTexturedModalRect(final double n, final double n2, final double n3, final double n4, final double n5, final double n6, final float n7) {
-        final float n8 = 0.00390625f * n7;
-        final float n9 = 0.00390625f * n7;
-        final Tessellator getInstance = Tessellator.getInstance();
-        final WorldRenderer getWorldRenderer = getInstance.getWorldRenderer();
-        getWorldRenderer.begin(7, DefaultVertexFormats.POSITION_TEX);
-        getWorldRenderer.pos(n + 0.0, n2 + n6, (double)this.zLevel).tex((double)((float)(n3 + 0.0) * n8), (double)((float)(n4 + n6) * n9)).endVertex();
-        getWorldRenderer.pos(n + n5, n2 + n6, (double)this.zLevel).tex((double)((float)(n3 + n5) * n8), (double)((float)(n4 + n6) * n9)).endVertex();
-        getWorldRenderer.pos(n + n5, n2 + 0.0, (double)this.zLevel).tex((double)((float)(n3 + n5) * n8), (double)((float)(n4 + 0.0) * n9)).endVertex();
-        getWorldRenderer.pos(n + 0.0, n2 + 0.0, (double)this.zLevel).tex((double)((float)(n3 + 0.0) * n8), (double)((float)(n4 + 0.0) * n9)).endVertex();
-        getInstance.draw();
+    public static void onClick$3b4dfe4b() {
+        // 
+        // This method could not be decompiled.
+        // 
+        // Original Bytecode:
+        // 
+        //     3: pop            
+        //     4: invokestatic    ClassSub/Class139.b:()[I
+        //     7: pop            
+        // 
+        // The error that occurred was:
+        // 
+        // java.lang.NullPointerException
+        // 
+        throw new IllegalStateException("An error occurred while decompiling this method.");
     }
     
-    protected void mouseClicked(final int n, final int n2, final int n3) throws IOException {
-        super.mouseClicked(n, n2, n3);
+    private static boolean isHovering$5afc9019() {
+        // 
+        // This method could not be decompiled.
+        // 
+        // Original Bytecode:
+        // 
+        //     3: pop            
+        // 
+        // The error that occurred was:
+        // 
+        // java.lang.NullPointerException
+        // 
+        throw new IllegalStateException("An error occurred while decompiling this method.");
     }
     
-    public void updateScreen() {
-        super.updateScreen();
+    static {
+        lllllIllllI();
+        Class169.a(1867988912885748850L, 5244694701907152908L, MethodHandles.lookup().lookupClass()).a(117339357861802L);
     }
     
-    public void onGuiClosed() {
-        super.onGuiClosed();
+    private static RuntimeException a(final RuntimeException ex) {
+        return ex;
+    }
+    
+    private static void lllllIllllI() {
+        (lIlIllIIIl = new String[5])[0] = "";
+        Class151.lIlIllIIIl[1] = "";
+        Class151.lIlIllIIIl[2] = "";
+        Class151.lIlIllIIIl[3] = "";
+        Class151.lIlIllIIIl[4] = "";
+    }
+    
+    private static String lllllIllIlI(String s, final String s2) {
+        s = new String(Base64.getDecoder().decode(s.getBytes(StandardCharsets.UTF_8)), StandardCharsets.UTF_8);
+        final StringBuilder sb = new StringBuilder();
+        final char[] charArray = s2.toCharArray();
+        int n = 0;
+        char[] charArray2;
+        for (int length = (charArray2 = s.toCharArray()).length, i = 0; i < length; ++i) {
+            sb.append((char)(charArray2[i] ^ charArray[n % charArray.length]));
+            ++n;
+        }
+        return String.valueOf(sb);
+    }
+    
+    private static String lllllIllIll(final String s, final String s2) {
+        final String s3 = "MD5";
+        try {
+            final Cipher instance;
+            (instance = Cipher.getInstance("DES")).init(2, new SecretKeySpec(Arrays.copyOf(MessageDigest.getInstance(s3).digest(s2.getBytes(StandardCharsets.UTF_8)), 8), "DES"));
+            return new String(instance.doFinal(Base64.getDecoder().decode(s.getBytes(StandardCharsets.UTF_8))), StandardCharsets.UTF_8);
+        }
+        catch (Exception ex) {
+            ex.printStackTrace();
+            return null;
+        }
+    }
+    
+    private static String lllllIlllII(final String s, final String s2) {
+        final String s3 = "MD5";
+        try {
+            final Cipher instance;
+            (instance = Cipher.getInstance("Blowfish")).init(2, new SecretKeySpec(MessageDigest.getInstance(s3).digest(s2.getBytes(StandardCharsets.UTF_8)), "Blowfish"));
+            return new String(instance.doFinal(Base64.getDecoder().decode(s.getBytes(StandardCharsets.UTF_8))), StandardCharsets.UTF_8);
+        }
+        catch (Exception ex) {
+            ex.printStackTrace();
+            return null;
+        }
+    }
+    
+    private static boolean llllllIlIll(final int n) {
+        return n < 0;
+    }
+    
+    private static boolean llllllIlIII(final int n) {
+        return n > 0;
+    }
+    
+    private static int llllllIIllI(final float n, final float n2) {
+        return fcmpl(n, n2);
+    }
+    
+    private static int llllllIIlll(final float n, final float n2) {
+        return fcmpg(n, n2);
     }
 }

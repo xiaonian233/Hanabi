@@ -7,5 +7,9 @@ import org.spongepowered.asm.mixin.*;
 public abstract class MixinGui
 {
     @Shadow
-    protected float zLevel;
+    private float field_73735_i;
+    
+    public MixinGui() {
+        super();
+    }
 }

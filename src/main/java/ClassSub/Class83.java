@@ -1,8 +1,25 @@
 package ClassSub;
 
-public interface Class83<T>
+final class Class83 extends Thread
 {
-    public static final boolean 请你掂量�?下自己的分量再跟我在这里对话�?会装的好像我的语�?对你无关痛痒好吗我不想再和残废人墨迹了你懂吗还在那摇摆不定是吗你现在的语�?已经没有任何意义你开始对我死缠烂打毫无任何的意义NMSLNMSLNMSLNMSLNMSLNMSLNMSLNMSLNMSLNMSLNMSLNMSLNMSLNMSLNMSLNMSLNMSLNMSLNMSLNMSLNMSLNMSLNMSLNMSLNMSLNMSLNMSLNMSLNMSLNMSLNMSLNMSLNMSLNMSLNMSLNMSLNMSLNMSLNMSLNMSLNMSLNMSLNMSLNMSL �?��?��?��?��?��?��?��??;
+    private Class102 val$hud;
+    private Class102 this$0;
     
-    void onClick(final Class176<T> p0);
+    Class83(final Class102 val$hud) {
+        this.val$hud = val$hud;
+        super();
+    }
+    
+    @Override
+    public final void run() {
+        this.val$hud.setState(false, true);
+        final long n = 500L;
+        try {
+            Thread.sleep(n);
+        }
+        catch (InterruptedException ex) {
+            ex.printStackTrace();
+        }
+        this.val$hud.setState(true, true);
+    }
 }

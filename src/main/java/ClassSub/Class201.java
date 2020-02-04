@@ -1,20 +1,26 @@
 package ClassSub;
 
-public class Class201 extends Class59
+import cn.Hanabi.modules.Combat.*;
+import net.minecraft.network.play.client.*;
+import net.minecraft.network.*;
+
+public final class Class201 extends Thread
 {
-    public static final boolean Cracked_By_Somebody_Dumped_BY_Ganga_SupportedbySucen;
+    private TPHit this$0;
     
-    public Class201() {
-        super("AzureWare");
+    private Class201() {
+        super();
     }
     
     @Override
-    public boolean isLoginSuccessfully(final String s, final String s2) {
-        return Class30.doGet("http://hanabi.alphaantileak.cn:893/azureware/FUCKYOU/IRCLoginFUCKYOU.php?user=" + s + "&pass=" + s2).contains("true");
-    }
-    
-    @Override
-    public String getPrefix(final String s) {
-        return Class30.doGet("http://hanabi.alphaantileak.cn:893/azureware/FUCKYOU/getprefix.php?user=" + s);
+    public final void run() {
+        final long n = 1430L;
+        try {
+            Thread.sleep(n);
+        }
+        catch (InterruptedException ex) {
+            ex.printStackTrace();
+        }
+        TPHit.access$4300().func_147114_u().func_147298_b().func_179290_a((Packet)new C03PacketPlayer$C04PacketPlayerPosition(TPHit.access$4000().field_71439_g.field_70165_t + 0.08, TPHit.access$4100().field_71439_g.field_70163_u, TPHit.access$4200().field_71439_g.field_70161_v, false));
     }
 }

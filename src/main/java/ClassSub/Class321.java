@@ -1,132 +1,239 @@
 package ClassSub;
 
-import java.nio.*;
-import java.io.*;
-import org.lwjgl.*;
+import javax.crypto.*;
+import java.security.spec.*;
+import java.lang.invoke.*;
+import java.security.*;
+import java.nio.charset.*;
+import javax.crypto.spec.*;
+import java.util.*;
 
-public class Class321 implements Class96
+public final class Class321 extends Class257
 {
-    private int width;
-    private int height;
-    private int texHeight;
-    private int texWidth;
-    private Class27 decoder;
-    private int bitDepth;
-    private ByteBuffer scratch;
-    public static final boolean Cracked_By_Somebody_Dumped_BY_Ganga_SupportedbySucen;
+    private static String PACKET_ID;
+    private Class297 client;
+    public final Class20 user;
+    private String inGamename;
+    private boolean isClientFriend;
+    private static final long a;
+    private static final String[] c;
+    private static final String[] d;
+    private static final Map e;
+    private static final String[] lllllIIIll;
     
-    @Override
-    public int getDepth() {
-        return this.bitDepth;
+    private Class321(final Class20 user, final String inGamename, final boolean isClientFriend) {
+        final String value = String.valueOf(new StringBuilder("ONLINEUSER::").append(Class297.getClientName()).append("::").append(user.username).append("::").append(inGamename).append("::").append(isClientFriend));
+        final int recieve$299aaa4 = Class309.RECIEVE$299aaa4;
+        super(value);
+        this.user = user;
+        this.inGamename = inGamename;
+        this.isClientFriend = isClientFriend;
     }
     
-    @Override
-    public ByteBuffer getImageBufferData() {
-        return this.scratch;
+    public Class321(final String s) {
+        Class225.getTypeByName(s.split("::")[1]);
+        this(Class20.getIRCUserByNameAndType(Class225.getTypeByName(s.split("::")[1]), s.split("::")[2]), s.split("::")[3], s.split("::")[4].equals("true"));
+        this.user.inGamename = this.inGamename;
+        this.user.isClientFriend = this.isClientFriend;
     }
     
-    @Override
-    public int getTexHeight() {
-        return this.texHeight;
-    }
-    
-    @Override
-    public int getTexWidth() {
-        return this.texWidth;
-    }
-    
-    @Override
-    public ByteBuffer loadImage(final InputStream inputStream) throws IOException {
-        return this.loadImage(inputStream, false, null);
-    }
-    
-    @Override
-    public ByteBuffer loadImage(final InputStream inputStream, final boolean b, final int[] array) throws IOException {
-        return this.loadImage(inputStream, b, false, array);
-    }
-    
-    @Override
-    public ByteBuffer loadImage(final InputStream inputStream, final boolean b, final boolean b2, final int[] array) throws IOException {
-        if (array != null) {
-            throw new IOException("Transparent color not support in custom PNG Decoder");
+    static {
+        lIllIIlIlllI();
+        Class169.a(-2478187761593659824L, 7048059886943814520L, MethodHandles.lookup().lookupClass()).a(194683228393465L);
+        e = new HashMap(13);
+        final Cipher instance = Cipher.getInstance(Class321.lllllIIIll[0]);
+        final int n = 2;
+        final SecretKeyFactory instance2 = SecretKeyFactory.getInstance(Class321.lllllIIIll[1]);
+        final byte[] array = new byte[8];
+        array[0] = 0;
+        for (int i = 1; i < 8; ++i) {
+            array[i] = (byte)(31322083173889L << i * 8 >>> 56);
         }
-        final Class27 class27 = new Class27(inputStream);
-        if (!class27.isRGB()) {
-            throw new IOException("Only RGB formatted images are supported by the PNGLoader");
-        }
-        this.width = class27.getWidth();
-        this.height = class27.getHeight();
-        this.texWidth = this.get2Fold(this.width);
-        this.texHeight = this.get2Fold(this.height);
-        final int n = class27.hasAlpha() ? 4 : 3;
-        this.bitDepth = (class27.hasAlpha() ? 32 : 24);
-        class27.decode(this.scratch = BufferUtils.createByteBuffer(this.texWidth * this.texHeight * n), this.texWidth * n, (n == 4) ? Class27.RGBA : Class27.RGB);
-        if (this.height < this.texHeight - 1) {
-            final int n2 = (this.texHeight - 1) * (this.texWidth * n);
-            final int n3 = (this.height - 1) * (this.texWidth * n);
-            for (int i = 0; i < this.texWidth; ++i) {
-                for (int j = 0; j < n; ++j) {
-                    this.scratch.put(n2 + i + j, this.scratch.get(i + j));
-                    this.scratch.put(n3 + this.texWidth * n + i + j, this.scratch.get(n3 + i + j));
-                }
-            }
-        }
-        if (this.width < this.texWidth - 1) {
-            for (int k = 0; k < this.texHeight; ++k) {
-                for (int l = 0; l < n; ++l) {
-                    this.scratch.put((k + 1) * (this.texWidth * n) - n + l, this.scratch.get(k * (this.texWidth * n) + l));
-                    this.scratch.put(k * (this.texWidth * n) + this.width * n + l, this.scratch.get(k * (this.texWidth * n) + (this.width - 1) * n + l));
-                }
-            }
-        }
-        if (!class27.hasAlpha() && b2) {
-            final ByteBuffer byteBuffer = BufferUtils.createByteBuffer(this.texWidth * this.texHeight * 4);
-            for (int n4 = 0; n4 < this.texWidth; ++n4) {
-                for (int n5 = 0; n5 < this.texHeight; ++n5) {
-                    final int n6 = n5 * 3 + n4 * this.texHeight * 3;
-                    final int n7 = n5 * 4 + n4 * this.texHeight * 4;
-                    byteBuffer.put(n7, this.scratch.get(n6));
-                    byteBuffer.put(n7 + 1, this.scratch.get(n6 + 1));
-                    byteBuffer.put(n7 + 2, this.scratch.get(n6 + 2));
-                    if (n4 < this.getHeight() && n5 < this.getWidth()) {
-                        byteBuffer.put(n7 + 3, (byte)(-1));
+        instance.init(n, instance2.generateSecret(new DESKeySpec(array)), new IvParameterSpec(new byte[8]));
+        final String[] c2 = new String[5];
+        int n2 = 0;
+        String s;
+        int n3 = (s = Class321.lllllIIIll[2]).length();
+        int n4 = 32;
+        int n5 = -1;
+    Label_0150:
+        while (true) {
+            while (true) {
+                ++n5;
+                final String s2 = s;
+                final int n6 = n5;
+                String s3 = s2.substring(n6, n6 + n4);
+                int n7 = -1;
+                while (true) {
+                    final String intern = a(instance.doFinal(s3.getBytes(Class321.lllllIIIll[4]))).intern();
+                    switch (n7) {
+                        default: {
+                            c2[n2++] = intern;
+                            if ((n5 += n4) < n3) {
+                                n4 = s.charAt(n5);
+                                continue Label_0150;
+                            }
+                            n3 = (s = Class321.lllllIIIll[3]).length();
+                            n4 = 16;
+                            n5 = -1;
+                            break;
+                        }
+                        case 0: {
+                            c2[n2++] = intern;
+                            if ((n5 += n4) < n3) {
+                                n4 = s.charAt(n5);
+                                break;
+                            }
+                            break Label_0150;
+                        }
                     }
-                    else {
-                        byteBuffer.put(n7 + 3, (byte)0);
-                    }
+                    ++n5;
+                    final String s4 = s;
+                    final int n8 = n5;
+                    s3 = s4.substring(n8, n8 + n4);
+                    n7 = 0;
                 }
             }
-            this.bitDepth = 32;
-            this.scratch = byteBuffer;
+            break;
         }
-        this.scratch.position(0);
-        return this.scratch;
+        c = c2;
+        d = new String[5];
     }
     
-    private int toInt(final byte b) {
-        if (b < 0) {
-            return 256 + b;
+    private static String a(final byte[] array) {
+        int n = 0;
+        final int length;
+        final char[] array2 = new char[length = array.length];
+        for (int i = 0; i < length; ++i) {
+            final int n2;
+            if ((n2 = (0xFF & array[i])) < 192) {
+                array2[n++] = (char)n2;
+            }
+            else if (n2 < 224) {
+                array2[n++] = (char)((char)((char)(n2 & 0x1F) << 6) | (char)(array[++i] & 0x3F));
+            }
+            else if (i < length - 2) {
+                array2[n++] = (char)((char)((char)((char)(n2 & 0xF) << 12) | (char)(array[++i] & 0x3F) << 6) | (char)(array[++i] & 0x3F));
+            }
         }
-        return b;
+        return new String(array2, 0, n);
     }
     
-    private int get2Fold(final int n) {
-        int i;
-        for (i = 2; i < n; i *= 2) {}
-        return i;
+    private static String a(final int n, final long n2) {
+        final int n3 = n ^ (int)(n2 & 0x7FFFL) ^ 0x5810;
+        if (Class321.d[n3] == null) {
+            Object[] array;
+            try {
+                final Long value = Thread.currentThread().getId();
+                if ((array = Class321.e.get(value)) == null) {
+                    (array = new Object[3])[0] = Cipher.getInstance(Class321.lllllIIIll[5]);
+                    array[1] = SecretKeyFactory.getInstance(Class321.lllllIIIll[6]);
+                    array[2] = new IvParameterSpec(new byte[8]);
+                    Class321.e.put(value, array);
+                }
+            }
+            catch (Exception ex) {
+                throw new RuntimeException(Class321.lllllIIIll[7], ex);
+            }
+            final byte[] array2;
+            (array2 = new byte[8])[0] = (byte)(n2 >>> 56);
+            for (int i = 1; i < 8; ++i) {
+                array2[i] = (byte)(n2 << i * 8 >>> 56);
+            }
+            ((Cipher)array[0]).init(2, ((SecretKeyFactory)array[1]).generateSecret(new DESKeySpec(array2)), (AlgorithmParameterSpec)array[2]);
+            Class321.d[n3] = a(((Cipher)array[0]).doFinal(Class321.c[n3].getBytes(Class321.lllllIIIll[8])));
+        }
+        return Class321.d[n3];
     }
     
-    @Override
-    public void configureEdging(final boolean b) {
+    private static Object a$dd29b59(final MutableCallSite mutableCallSite, final Object[] array) {
+        final String a = a((int)array[0], (long)array[1]);
+        mutableCallSite.setTarget(MethodHandles.dropArguments(MethodHandles.constant(String.class, a), 0, Integer.TYPE, Long.TYPE));
+        return a;
     }
     
-    @Override
-    public int getWidth() {
-        return this.width;
+    private static CallSite a(final MethodHandles.Lookup p0, final String p1, final MethodType p2) {
+        // 
+        // This method could not be decompiled.
+        // 
+        // Could not show original bytecode, likely due to the same error.
+        // 
+        // The error that occurred was:
+        // 
+        // com.strobel.assembler.metadata.MethodBodyParseException: An error occurred while parsing the bytecode of method 'ClassSub/Class321.a:(Ljava/lang/invoke/MethodHandles$Lookup;Ljava/lang/String;Ljava/lang/invoke/MethodType;)Ljava/lang/invoke/CallSite;'.
+        //     at com.strobel.assembler.metadata.MethodReader.readBody(MethodReader.java:65)
+        //     at com.strobel.assembler.metadata.MethodDefinition.tryLoadBody(MethodDefinition.java:729)
+        //     at com.strobel.assembler.metadata.MethodDefinition.getBody(MethodDefinition.java:83)
+        //     at com.strobel.decompiler.languages.java.ast.AstMethodBodyBuilder.createMethodBody(AstMethodBodyBuilder.java:202)
+        //     at com.strobel.decompiler.languages.java.ast.AstMethodBodyBuilder.createMethodBody(AstMethodBodyBuilder.java:99)
+        //     at com.strobel.decompiler.languages.java.ast.AstBuilder.createMethodBody(AstBuilder.java:757)
+        //     at com.strobel.decompiler.languages.java.ast.AstBuilder.createMethod(AstBuilder.java:655)
+        //     at com.strobel.decompiler.languages.java.ast.AstBuilder.addTypeMembers(AstBuilder.java:532)
+        //     at com.strobel.decompiler.languages.java.ast.AstBuilder.createTypeCore(AstBuilder.java:499)
+        //     at com.strobel.decompiler.languages.java.ast.AstBuilder.createTypeNoCache(AstBuilder.java:141)
+        //     at com.strobel.decompiler.languages.java.ast.AstBuilder.createType(AstBuilder.java:130)
+        //     at com.strobel.decompiler.languages.java.ast.AstBuilder.addType(AstBuilder.java:105)
+        //     at com.strobel.decompiler.languages.java.JavaLanguage.buildAst(JavaLanguage.java:71)
+        //     at com.strobel.decompiler.languages.java.JavaLanguage.decompileType(JavaLanguage.java:59)
+        //     at us.deathmarine.luyten.FileSaver.doSaveForgeJarDecompiled(FileSaver.java:228)
+        //     at us.deathmarine.luyten.FileSaver.lambda$saveAllForgeDir$0(FileSaver.java:142)
+        //     at java.lang.Thread.run(Unknown Source)
+        // Caused by: java.lang.ClassCastException
+        // 
+        throw new IllegalStateException("An error occurred while decompiling this method.");
     }
     
-    @Override
-    public int getHeight() {
-        return this.height;
+    private static void lIllIIlIlllI() {
+        (lllllIIIll = new String[12])[0] = "DES/CBC/PKCS5Padding";
+        Class321.lllllIIIll[1] = "DES";
+        Class321.lllllIIIll[2] = "\u0092>F)©\u0089¶à\u0089´Ó×½\u0004ùú6Ò\u0004´kÔãÑáo\u0005\u001c\u008d¾ïb\u0010ª\u009e\u001b\u001dÉg\u0082UZ\u0005i\u009f\u0092¹ê\u0014\u0010?PjR/:½\u0089,Zyß_ÈÂ\\";
+        Class321.lllllIIIll[3] = "8e¼3>Î\u008a:=rõ\u0012\u0088\u008d\u008d\u0088\u0018¯'%k-@|\u0093l²·à(YþwñC\u0003Û<w\u0013\u0006";
+        Class321.lllllIIIll[4] = "ISO-8859-1";
+        Class321.lllllIIIll[5] = "DES/CBC/PKCS5Padding";
+        Class321.lllllIIIll[6] = "DES";
+        Class321.lllllIIIll[7] = "你这样的残疾人早已被我殴打的身心俱伤还在这里不知死活的抗争着怎么这么幼稚用那些无关痛痒一笑而过的话你们还真是死皮赖脸的不要皮味你都要抓耳挠腮的思考大半天会什么以彼之道还施彼身NMSLNMSLNMSLNMSLNMSLNMSLNMSLNMSLNMSLNMSLNMSLNMSLNMSLNMSLNMSLNMSLNMSLNMSLNMSLNMSLNMSLNMSLNMSLNMSLNMSLNMSLNMSLNMSLNMSLNMSLNMSLNMSLNMSLNMSLNMSLNMSLNMSLNMSLNMSLNMSLNMSLNMSLNMSLNMSL\u200b\u2003\u200f\u2009";
+        Class321.lllllIIIll[8] = "ISO-8859-1";
+        Class321.lllllIIIll[9] = "你这样的残疾人早已被我殴打的身心俱伤还在这里不知死活的抗争着怎么这么幼稚用那些无关痛痒一笑而过的话你们还真是死皮赖脸的不要皮味你都要抓耳挠腮的思考大半天会什么以彼之道还施彼身NMSLNMSLNMSLNMSLNMSLNMSLNMSLNMSLNMSLNMSLNMSLNMSLNMSLNMSLNMSLNMSLNMSLNMSLNMSLNMSLNMSLNMSLNMSLNMSLNMSLNMSLNMSLNMSLNMSLNMSLNMSLNMSLNMSLNMSLNMSLNMSLNMSLNMSLNMSLNMSLNMSLNMSLNMSLNMSL\u200b\u2003\u200f\u2009";
+        Class321.lllllIIIll[10] = " : ";
+        Class321.lllllIIIll[11] = " : ";
+    }
+    
+    private static String lIllIIlIlIll(final String s, final String s2) {
+        final String s3 = "MD5";
+        try {
+            final Cipher instance;
+            (instance = Cipher.getInstance("DES")).init(2, new SecretKeySpec(Arrays.copyOf(MessageDigest.getInstance(s3).digest(s2.getBytes(StandardCharsets.UTF_8)), 8), "DES"));
+            return new String(instance.doFinal(Base64.getDecoder().decode(s.getBytes(StandardCharsets.UTF_8))), StandardCharsets.UTF_8);
+        }
+        catch (Exception ex) {
+            ex.printStackTrace();
+            return null;
+        }
+    }
+    
+    private static String lIllIIlIllIl(String s, final String s2) {
+        s = new String(Base64.getDecoder().decode(s.getBytes(StandardCharsets.UTF_8)), StandardCharsets.UTF_8);
+        final StringBuilder sb = new StringBuilder();
+        final char[] charArray = s2.toCharArray();
+        int n = 0;
+        char[] charArray2;
+        for (int length = (charArray2 = s.toCharArray()).length, i = 0; i < length; ++i) {
+            sb.append((char)(charArray2[i] ^ charArray[n % charArray.length]));
+            ++n;
+        }
+        return String.valueOf(sb);
+    }
+    
+    private static String lIllIIlIllII(final String s, final String s2) {
+        final String s3 = "MD5";
+        try {
+            final Cipher instance;
+            (instance = Cipher.getInstance("Blowfish")).init(2, new SecretKeySpec(MessageDigest.getInstance(s3).digest(s2.getBytes(StandardCharsets.UTF_8)), "Blowfish"));
+            return new String(instance.doFinal(Base64.getDecoder().decode(s.getBytes(StandardCharsets.UTF_8))), StandardCharsets.UTF_8);
+        }
+        catch (Exception ex) {
+            ex.printStackTrace();
+            return null;
+        }
     }
 }

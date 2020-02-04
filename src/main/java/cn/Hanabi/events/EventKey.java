@@ -2,15 +2,16 @@ package cn.Hanabi.events;
 
 import com.darkmagician6.eventapi.events.*;
 
-public class EventKey implements Event
+public final class EventKey implements Event
 {
-    private int key;
+    public int key;
     
     public EventKey(final int key) {
+        super();
         this.key = key;
     }
     
-    public int getKey() {
+    private int getKey() {
         return this.key;
     }
 }

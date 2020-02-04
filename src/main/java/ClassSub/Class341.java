@@ -1,15 +1,20 @@
 package ClassSub;
 
-public class Class341 extends Exception
+public interface Class341
 {
-    private static final long serialVersionUID = 1L;
-    public static final boolean Cracked_By_Somebody_Dumped_BY_Ganga_SupportedbySucen;
+    boolean applyGLLineFixes();
     
-    public Class341(final String s) {
-        super(s);
-    }
+    void start();
     
-    public Class341(final String s, final Throwable t) {
-        super(s, t);
-    }
+    void end();
+    
+    void vertex(final float p0, final float p1);
+    
+    void color(final float p0, final float p1, final float p2, final float p3);
+    
+    void setWidth(final float p0);
+    
+    void setAntiAlias(final boolean p0);
+    
+    void setLineCaps(final boolean p0);
 }
